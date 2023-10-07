@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
     { expiresIn: "1d" }
   );
 
-//   req.user = registerUser;
+  //   req.user = registerUser;
 
   return res.status(200).send({
     success: true,
