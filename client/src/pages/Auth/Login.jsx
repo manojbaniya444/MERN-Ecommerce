@@ -27,6 +27,7 @@ const Login = () => {
       setAuth({
         name: response?.data?.name,
         token: response?.data?.token,
+        user: response?.data?.user,
       });
       localStorage.setItem("auth", JSON.stringify(response?.data));
 

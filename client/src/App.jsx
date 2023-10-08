@@ -7,6 +7,11 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ProtectedUserRoute from "./pages/Routes/ProtectedUserRoute";
 import Dashboard from "./pages/Dashboard";
+import UserDashboard from "./components/UserDashboard";
+import ProtectedAdminRoute from "./pages/Routes/ProtectedAdminRoute";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import CreateCategory from "./pages/Admin/CreateCategory";
+import AddProducts from "./pages/Admin/AddProducts";
 
 const App = () => {
   return (
@@ -22,7 +27,26 @@ const App = () => {
               <Dashboard />
             </ProtectedUserRoute>
           }
-        />
+        >
+          <Route path="/dashboard/user-profile" element={<UserDashboard />} />
+        </Route>
+        <Route
+          path="/dashboard/admin"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboard />
+            </ProtectedAdminRoute>
+          }
+        >
+          <Route
+            path="/dashboard/admin/create-category"
+            element={<CreateCategory />}
+          />
+          <Route
+            path="/dashboard/admin/add-products"
+            element={<AddProducts />}
+          />
+        </Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

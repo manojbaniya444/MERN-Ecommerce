@@ -79,6 +79,7 @@ const loginUser = async (req, res) => {
     success: true,
     message: "Logged in successfully",
     name: registeredUser.name,
+    user: registeredUser,
     token,
   });
 };
@@ -88,4 +89,15 @@ const userAuthentication = (req, res) => {
   res.status(200).send({ success: true, message: "User route access" });
 };
 
-module.exports = { getAllUsers, registerUser, loginUser, userAuthentication };
+//* Admin protected route
+const adminAuthentication = (req, res) => {
+  res.status(200).send({ success: true, message: "Admin route access" });
+};
+
+module.exports = {
+  getAllUsers,
+  registerUser,
+  loginUser,
+  userAuthentication,
+  adminAuthentication,
+};
