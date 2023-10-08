@@ -5,15 +5,24 @@ import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import ProtectedUserRoute from "./pages/Routes/ProtectedUserRoute";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedUserRoute>
+              <Dashboard />
+            </ProtectedUserRoute>
+          }
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

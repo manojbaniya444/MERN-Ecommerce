@@ -1,7 +1,8 @@
 const JWT = require("jsonwebtoken");
 const userModal = require("../model/userModal");
+require("dotenv").config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "9df0d9f93090f";
+const JWT_SECRET = process.env.ACCESS_SECRET;
 
 //* Authentication test
 const verifyAuthentication = async (req, res, next) => {

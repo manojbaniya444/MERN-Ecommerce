@@ -31,8 +31,11 @@ const Register = () => {
   };
   return (
     <>
+      <Link to="/" className="m-5 text-3xl font-bold">
+        Home
+      </Link>
       <h2 className="text-center mt-5 text-2xl">Register</h2>
-      <div className="flex items-center justify-center mt-[5%]">
+      <div className="flex items-center justify-center mt-2">
         <form
           onSubmit={registerHandler}
           className="bg-zinc-900 text-white flex flex-col gap-5 p-5 rounded-md w-3/4 max-w-[500px]"

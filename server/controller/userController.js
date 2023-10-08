@@ -2,8 +2,10 @@ const bcrypt = require("bcrypt");
 const userModal = require("../model/userModal");
 const JWT = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET || "9df0d9f93090f";
-// const JWT_SECRET = process.env.JWT_SECRET;
+require("dotenv").config();
+
+// const JWT_SECRET = process.env.JWT_SECRET || "9df0d9f93090f";
+const JWT_SECRET = process.env.ACCESS_SECRET;
 
 const getAllUsers = (req, res) => {
   res.status(200).send({
@@ -76,8 +78,14 @@ const loginUser = async (req, res) => {
   return res.status(200).send({
     success: true,
     message: "Logged in successfully",
+    name: registeredUser.name,
     token,
   });
 };
 
-module.exports = { getAllUsers, registerUser, loginUser };
+//* User protected route
+const userAuthentication = (req, res) => {
+  res.status(200).send({ success: true, message: "User route access" });
+};
+
+module.exports = { getAllUsers, registerUser, loginUser, userAuthentication };
