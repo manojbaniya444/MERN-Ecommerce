@@ -30,7 +30,9 @@ const Navbar = () => {
             <li className="flex items-center justify-between gap-3">
               <NavLink
                 to={`${
-                  auth?.user?.role === 1 ? "/dashboard/admin" : "/dashboard"
+                  auth?.user?.role === 1
+                    ? "/dashboard/admin"
+                    : "/dashboard/user"
                 }`}
               >
                 Dashboard

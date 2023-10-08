@@ -59,6 +59,9 @@ export const AuthProvider = ({ children }) => {
     if (auth?.token) authCheck();
   }, [auth?.token]);
 
+  console.log("admin", isAdminVerified);
+  console.log("user", isUserVerified);
+
   return (
     <AuthContext.Provider
       value={{

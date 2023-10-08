@@ -21,14 +21,14 @@ const App = () => {
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/user"
           element={
             <ProtectedUserRoute>
               <Dashboard />
             </ProtectedUserRoute>
           }
         >
-          <Route path="/dashboard/user-profile" element={<UserDashboard />} />
+          <Route path="/dashboard/user/profile" element={<UserDashboard />} />
         </Route>
         <Route
           path="/dashboard/admin"
