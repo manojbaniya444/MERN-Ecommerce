@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+// import { useAppContext } from "../../context/globalContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registerFormData, setRegisterFormData] = useState({
@@ -9,6 +11,9 @@ const Register = () => {
     password: "",
     answer: "",
   });
+
+  // const { setNotificaton } = useAppContext();
+  const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     setRegisterFormData({
@@ -25,8 +30,10 @@ const Register = () => {
       );
       console.log(response.data.message);
       setRegisterFormData({ name: "", email: "", password: "", answer: "" });
+      // setNotificaton({ show: true, message: "Account created successfully" });
+      navigate("/login");
     } catch (error) {
-      console.log("Error register user", error.response.data.message, error);
+      console.log("Error register user", error);
     }
   };
   return (

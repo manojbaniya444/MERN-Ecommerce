@@ -12,12 +12,17 @@ import ProtectedAdminRoute from "./pages/Routes/ProtectedAdminRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import AddProducts from "./pages/Admin/AddProducts";
-// import Notification from "./components/Notification";
+import Notification from "./components/Notification";
+
+import { useAppContext } from "./context/globalContext";
 
 const App = () => {
+  const { notification } = useAppContext();
+
   return (
     <BrowserRouter>
-      {/* <Notification /> */}
+      {notification.show && <Notification notification={notification} />}
+
       <Routes>
         <Route path="/" exact element={<Home />} />
 

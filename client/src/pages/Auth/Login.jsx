@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useAppContext } from "../../context/globalContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const { setAuth, auth } = useAuthContext();
+  const { setNotification, notification } = useAppContext();
 
   const navigate = useNavigate();
 
@@ -36,6 +38,11 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setErrorMessage(null);
+        setNotification({
+          ...notification,
+          show: true,
+          message: "Successfully log in",
+        });
         navigate("/");
       }, 700);
     } catch (error) {

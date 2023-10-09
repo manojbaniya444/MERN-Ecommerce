@@ -1,9 +1,9 @@
 import React from "react";
 
-const Notification = ({ message = "Notification" }) => {
+const Notification = ({ notification }) => {
   return (
-    <div className="p-2 w-[300px] h-[100px] mt-[5%]  bg-orange-700 text-white left-[50%] absolute translate-x-[-50%] text-center">
-      {message}
+    <div className="p-2 w-[300px] font-medium text-2xl mt-2 rounded bg-green-700 text-white left-[50%] absolute translate-x-[-50%] text-center">
+      {notification.message}
     </div>
   );
 };

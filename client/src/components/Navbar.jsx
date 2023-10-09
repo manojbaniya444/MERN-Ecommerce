@@ -2,15 +2,18 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/globalContext";
 
 const Navbar = () => {
   const { auth, setAuth } = useAuthContext();
+  const { setNotification } = useAppContext();
 
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     setAuth(null);
     localStorage.removeItem("auth");
+    setNotification({ show: true, message: "Logged out successfully" });
     navigate("/login");
   };
   return (
