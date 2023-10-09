@@ -11,10 +11,10 @@ const AdminDashboard = () => {
         <div className="">
           <ul className="mt-5 flex flex-col gap-5 text-white">
             <li>
-              <Link to="/dashboard/admin/create-category">Create category</Link>
+              <Link to="/admin/create-category">Create category</Link>
             </li>
             <li>
-              <Link to="/dashboard/admin/add-products">Add Products</Link>
+              <Link to="/admin/add-products">Add Products</Link>
             </li>
             <li>
               <Link>View Orders</Link>

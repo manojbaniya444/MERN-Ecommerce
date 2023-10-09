@@ -1,8 +1,31 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/authContext";
-import { Navigate } from "react-router-dom";
+import Loader from "../../components/Loader";
 
 const ProtectedUserRoute = ({ children }) => {
-  const { isUserVerified, auth } = useAuthContext();
-  return isUserVerified ? children : <Navigate to="/" />;
+  const [userVerified, setUserVerified] = useState(false);
+  const { auth } = useAuthContext();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const response = await axios.get(
+        "http://localhost:8080/users/check-user-auth",
+        {
+          headers: {
+            authorization: auth?.token,
+          },
+        }
+      );
+
+      if (response?.data?.success) setUserVerified(true);
+    };
+
+    if (auth?.token) checkAuth();
+  }, [auth?.token]);
+
+  console.log(userVerified);
+  return userVerified ? children : <Loader />;
 };
+
 export default ProtectedUserRoute;

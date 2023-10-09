@@ -37,4 +37,22 @@ const verifyAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { verifyAuthentication, verifyAdmin };
+//* User check
+const verifyUser = async (req, res, next) => {
+  const currentUser = await userModal.findById(req.user.id);
+
+  try {
+    if (currentUser?.role === 1) {
+      return res
+        .status(403)
+        .send({ success: false, message: "Login with user required" });
+    }
+    next();
+  } catch (error) {
+    return res
+      .status(401)
+      .send({ success: false, message: "Admin User failed", error });
+  }
+};
+
+module.exports = { verifyAuthentication, verifyAdmin, verifyUser };

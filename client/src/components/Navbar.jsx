@@ -4,15 +4,12 @@ import { useAuthContext } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { auth, setAuth, setIsUserVerified, setIsAdminVerified } =
-    useAuthContext();
+  const { auth, setAuth } = useAuthContext();
 
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     setAuth(null);
-    setIsAdminVerified(false);
-    setIsUserVerified(false);
     localStorage.removeItem("auth");
     navigate("/login");
   };
@@ -28,15 +25,11 @@ const Navbar = () => {
               Logout
             </li>
             <li className="flex items-center justify-between gap-3">
-              <NavLink
-                to={`${
-                  auth?.user?.role === 1 ? "/" : "/"
-                }`}
-              >
+              <NavLink to={`${auth?.user?.role === 1 ? "/admin" : "/user"}`}>
                 Dashboard
               </NavLink>
               <Link
-                to="/dashboard/user-profile"
+                to={`${auth?.user?.role === 1 ? "/admin" : "/user/profile"}`}
                 className={
                   auth?.user?.role === 1
                     ? "p-2 bg-green-700 rounded-lg"

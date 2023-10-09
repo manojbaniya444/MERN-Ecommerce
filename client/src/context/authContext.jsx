@@ -5,8 +5,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
-  const [isUserVerified, setIsUserVerified] = useState(false);
-  const [isAdminVerified, setIsAdminVerified] = useState(false);
 
   //! Fetch auth from local storage
   useEffect(() => {
@@ -22,57 +20,31 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  //! User authorized protected route check
-  useEffect(() => {
-    const authCheck = async () => {
-      const response = await axios.get(
-        "http://localhost:8080/users/check-user-auth",
-        {
-          headers: {
-            authorization: auth?.token,
-          },
-        }
-      );
-      setIsAdminVerified(false);
-      setIsUserVerified(response?.data?.success);
-    };
-    if (auth?.token) {
-      authCheck();
-    }
-  }, [auth?.token]);
+  // //! Admin authorized protected route check
+  // useEffect(() => {
+  //   const authCheck = async () => {
+  //     const response = await axios.get(
+  //       "http://localhost:8080/users/check-admin-auth",
+  //       {
+  //         headers: {
+  //           authorization: auth?.token,
+  //         },
+  //       }
+  //     );
+  //     if (response) {
+  //       setIsAdminVerified(response?.data?.success);
+  //       setIsUserVerified(false);
+  //     }
+  //   };
 
-  //! Admin authorized protected route check
-  useEffect(() => {
-    const authCheck = async () => {
-      const response = await axios.get(
-        "http://localhost:8080/users/check-admin-auth",
-        {
-          headers: {
-            authorization: auth?.token,
-          },
-        }
-      );
-      if (response) {
-        setIsAdminVerified(response?.data?.success);
-        setIsUserVerified(false);
-      }
-    };
-
-    if (auth?.token) authCheck();
-  }, [auth?.token]);
-
-  // console.log("admin", isAdminVerified);
-  // console.log("user", isUserVerified);
+  //   if (auth?.token) authCheck();
+  // }, [auth?.token]);
 
   return (
     <AuthContext.Provider
       value={{
         auth,
         setAuth,
-        isUserVerified,
-        setIsUserVerified,
-        isAdminVerified,
-        setIsAdminVerified,
       }}
     >
       {children}
