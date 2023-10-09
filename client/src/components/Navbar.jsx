@@ -11,8 +11,8 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     setAuth(null);
-    setIsUserVerified(false);
     setIsAdminVerified(false);
+    setIsUserVerified(false);
     localStorage.removeItem("auth");
     navigate("/login");
   };
@@ -30,9 +30,7 @@ const Navbar = () => {
             <li className="flex items-center justify-between gap-3">
               <NavLink
                 to={`${
-                  auth?.user?.role === 1
-                    ? "/dashboard/admin"
-                    : "/dashboard/user"
+                  auth?.user?.role === 1 ? "/" : "/"
                 }`}
               >
                 Dashboard

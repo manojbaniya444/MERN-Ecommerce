@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
           },
         }
       );
+      setIsAdminVerified(false);
       setIsUserVerified(response?.data?.success);
     };
     if (auth?.token) {
@@ -53,14 +54,15 @@ export const AuthProvider = ({ children }) => {
       );
       if (response) {
         setIsAdminVerified(response?.data?.success);
+        setIsUserVerified(false);
       }
     };
 
     if (auth?.token) authCheck();
   }, [auth?.token]);
 
-  console.log("admin", isAdminVerified);
-  console.log("user", isUserVerified);
+  // console.log("admin", isAdminVerified);
+  // console.log("user", isUserVerified);
 
   return (
     <AuthContext.Provider

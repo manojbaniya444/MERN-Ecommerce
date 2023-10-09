@@ -18,35 +18,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/register" exact element={<Register />} />
-        <Route
-          path="/dashboard/user"
-          element={
-            <ProtectedUserRoute>
-              <Dashboard />
-            </ProtectedUserRoute>
-          }
-        >
-          <Route path="/dashboard/user/profile" element={<UserDashboard />} />
-        </Route>
-        <Route
-          path="/dashboard/admin"
-          element={
-            <ProtectedAdminRoute>
-              <AdminDashboard />
-            </ProtectedAdminRoute>
-          }
-        >
-          <Route
-            path="/dashboard/admin/create-category"
-            element={<CreateCategory />}
-          />
-          <Route
-            path="/dashboard/admin/add-products"
-            element={<AddProducts />}
-          />
-        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

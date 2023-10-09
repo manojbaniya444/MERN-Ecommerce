@@ -1,13 +1,10 @@
 import { useAuthContext } from "../../context/authContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import Login from "../Auth/Login";
 
 const ProtectedAdminRoute = ({ children }) => {
-  const { isAdminVerified, auth } = useAuthContext();
-  if (auth && auth?.user?.role !== 0) {
-    return isAdminVerified ? children : <Navigate to="/" />;
-  } else {
-    return <Navigate to="/login" />;
-  }
+  const { isAdminVerified } = useAuthContext();
+  return isAdminVerified ? children : <Navigate to="/" />;
 };
 
 export default ProtectedAdminRoute;
