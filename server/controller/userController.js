@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
   const token = JWT.sign(
     { id: registeredUser._id, username: registeredUser._id },
     JWT_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "3d" }
   );
 
   //   req.user = registerUser;

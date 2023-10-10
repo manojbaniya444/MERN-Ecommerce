@@ -15,6 +15,7 @@ import AddProducts from "./pages/Admin/AddProducts";
 import Notification from "./components/Notification";
 
 import { useAppContext } from "./context/globalContext";
+import AdminIndex from "./pages/Admin/AdminIndex";
 
 const App = () => {
   const { notification } = useAppContext();
@@ -45,6 +46,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         >
+          <Route index element={<AdminIndex />} />
           <Route path="create-category" element={<CreateCategory />} />
           <Route path="add-products" element={<AddProducts />} />
         </Route>

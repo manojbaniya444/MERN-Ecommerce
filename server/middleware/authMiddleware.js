@@ -7,10 +7,12 @@ const JWT_SECRET = process.env.ACCESS_SECRET;
 //* Authentication test
 const verifyAuthentication = async (req, res, next) => {
   try {
-    const decoded = await JWT.verify(req.headers.authorization, JWT_SECRET);
+    const decoded = JWT.verify(req.headers.authorization, JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
+    console.log(req.headers);
+
     res.status(403).send({
       succss: false,
       message: "Unauthorized",

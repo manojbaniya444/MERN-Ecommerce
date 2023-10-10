@@ -6,6 +6,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
 
+  //Default headers
+  axios.defaults.headers.common["Authorization"] = auth?.token;
+
   //! Fetch auth from local storage
   useEffect(() => {
     const data = localStorage.getItem("auth");
