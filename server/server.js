@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const userRoutes = require("./Routes/userRoutes");
 const testRoutes = require("./Routes/testRoutes");
+const categoryRoutes = require("./Routes/categoryRoutes");
+const productRoute = require("./Routes/productRoutes");
 
 const {
   verifyAdmin,
@@ -14,11 +16,14 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json()); // Body parser
+// app.use(express.urlencoded());
 app.use(cors());
 
 //! Routes
 app.use("/users", userRoutes);
 app.use("/test", verifyAuthentication, verifyAdmin, testRoutes);
+app.use("/category", categoryRoutes);
+app.use("/products", productRoute);
 
 //! Connect to the mongo database and start the server
 mongoose

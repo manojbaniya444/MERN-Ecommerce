@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const userModal = require("../model/userModal");
+const userModel = require("../model/userModel");
 const JWT = require("jsonwebtoken");
 
 require("dotenv").config();
@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const user = new userModal({
+    const user = new userModel({
       name,
       password: hashedPassword,
       email,
@@ -50,7 +50,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  const registeredUser = await userModal.findOne({ email });
+  const registeredUser = await userModel.findOne({ email });
   if (!registeredUser) {
     return res
       .status(404)

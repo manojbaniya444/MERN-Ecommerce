@@ -30,4 +30,4 @@ const UserModal = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("UserModal", UserModal);
+module.exports = mongoose.model("UserModel", UserModal);

@@ -13,7 +13,7 @@ const Navbar = () => {
   const logoutHandler = () => {
     setAuth(null);
     localStorage.removeItem("auth");
-    setNotification({ show: true, message: "Logged out successfully" });
+    setNotification({ show: true, message: "Logged out." });
     navigate("/login");
   };
   return (
