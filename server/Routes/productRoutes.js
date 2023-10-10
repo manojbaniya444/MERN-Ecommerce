@@ -13,6 +13,7 @@ const {
   singleProductController,
   updateProductController,
   deleteProductController,
+  getPhotoController,
 } = require("../controller/productController");
 
 router.post(
@@ -24,8 +25,10 @@ router.post(
 );
 router.get("/all-products", allProductsController);
 router.get("/single-product/:productId", singleProductController);
+router.get("/product-photo/:productId", getPhotoController);
 router.patch(
   "/update-product/:productId",
+  formidable(),
   verifyAuthentication,
   verifyAdmin,
   updateProductController
