@@ -161,13 +161,11 @@ const deleteProductController = async (req, res) => {
         .send({ success: false, message: "No product found to delete" });
     }
 
-    return res
-      .status(200)
-      .send({
-        success: false,
-        message: "Product deleted successfully",
-        product,
-      });
+    return res.status(200).send({
+      success: false,
+      message: "Product deleted successfully",
+      product,
+    });
   } catch (error) {
     console.log(error);
     res

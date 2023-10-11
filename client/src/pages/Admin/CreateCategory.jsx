@@ -85,7 +85,7 @@ const CreateCategory = () => {
         {edit?.show && (
           <form
             onSubmit={editCategoryHandler}
-            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px]"
+            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px] mt-10"
           >
             <label htmlFor="category-name">New category name:</label>
             <input
@@ -96,7 +96,7 @@ const CreateCategory = () => {
               onChange={(e) => {
                 setEdit({ ...edit, name: e.target.value });
               }}
-              className="flex-1 p-2 outline-none rounded-sm"
+              className="flex-1 p-2 outline-none rounded-sm bg-gray-200 "
             />
             <button
               type="submit"
@@ -110,7 +110,7 @@ const CreateCategory = () => {
         {!edit?.show && (
           <form
             onSubmit={submitHandler}
-            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px]"
+            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px] mt-10"
           >
             <label htmlFor="category">Category Name:</label>
             <input
@@ -119,7 +119,7 @@ const CreateCategory = () => {
               placeholder="Category name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="flex-1 p-2 outline-none rounded-sm"
+              className="flex-1 p-2 outline-none rounded-md  bg-gray-100 "
             />
             <button
               type="submit"
@@ -138,7 +138,7 @@ const CreateCategory = () => {
           return (
             <div
               key={item?._id}
-              className="flex gap-5  items-center p-2 max-w-[900px] w-[70%] bg-white rounded-md"
+              className="flex gap-5  items-center p-2 max-w-[900px] w-[70%] bg-gray-100 rounded-md"
             >
               <p className="self-start flex-1 p-2 font-medium text-2xl">
                 {item?.name}
