@@ -4,6 +4,7 @@ import { useAuthContext } from "../../context/authContext";
 import { useAppContext } from "../../context/globalContext";
 
 const CreateCategory = () => {
+  const [change, setChange] = useState(false);
   const [name, setName] = useState("");
   const [allCategory, setAllCategory] = useState();
   const [edit, setEdit] = useState({
@@ -18,7 +19,6 @@ const CreateCategory = () => {
   //* Create category logic
   const submitHandler = async (event) => {
     event.preventDefault();
-    // console.log(auth);
     try {
       const response = await axios.post(
         "http://localhost:8080/category/create-category",
@@ -30,6 +30,7 @@ const CreateCategory = () => {
         show: true,
         message: `[ ${name} ] category created successfully.`,
       });
+      setChange(!change);
     } catch (error) {
       console.log("Error creating category", error);
     }
@@ -45,18 +46,24 @@ const CreateCategory = () => {
         if (response?.data?.success) {
           setAllCategory(response?.data?.allCategory);
         }
+        console.log(response);
       };
       fetchAllCategory();
-    } catch (err) {
+    } catch (error) {
       console.log("Error fetching all category", error);
     }
-  }, [allCategory]);
+  }, [change]);
 
   //* Delete Category
   const deleteCategoryHandler = async (id) => {
-    const response = await axios.delete(
-      `http://localhost:8080/category/delete-category/${id}`
-    );
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/category/delete-category/${id}`
+      );
+      setChange(!change);
+    } catch (error) {
+      console.log(error, "Category error");
+    }
   };
 
   //* Edit Category
@@ -110,9 +117,11 @@ const CreateCategory = () => {
         {!edit?.show && (
           <form
             onSubmit={submitHandler}
-            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px] mt-10"
+            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px] mt-10 flex-col md:flex-row"
           >
-            <label htmlFor="category">Category Name:</label>
+            <label htmlFor="category" className="text-sm sm:text-md md:text-xl">
+              Category Name:
+            </label>
             <input
               type="text"
               name="category"
@@ -140,7 +149,7 @@ const CreateCategory = () => {
               key={item?._id}
               className="flex gap-5  items-center p-2 max-w-[900px] w-[70%] bg-gray-100 rounded-md"
             >
-              <p className="self-start flex-1 p-2 font-medium text-2xl">
+              <p className="text-sm p-1 sm:p-2 sm:text-md md:self-start flex-1 md:p-3 font-medium">
                 {item?.name}
               </p>
               {edit.show && edit.id === item?._id ? (

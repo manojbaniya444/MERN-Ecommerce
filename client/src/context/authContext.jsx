@@ -23,26 +23,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // //! Admin authorized protected route check
-  // useEffect(() => {
-  //   const authCheck = async () => {
-  //     const response = await axios.get(
-  //       "http://localhost:8080/users/check-admin-auth",
-  //       {
-  //         headers: {
-  //           authorization: auth?.token,
-  //         },
-  //       }
-  //     );
-  //     if (response) {
-  //       setIsAdminVerified(response?.data?.success);
-  //       setIsUserVerified(false);
-  //     }
-  //   };
-
-  //   if (auth?.token) authCheck();
-  // }, [auth?.token]);
-
   return (
     <AuthContext.Provider
       value={{

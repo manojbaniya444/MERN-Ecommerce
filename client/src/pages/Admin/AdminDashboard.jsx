@@ -1,26 +1,49 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex items-center w-full">
-      <div className="self-start sticky top-0 bg-orange-700 py-5 px-4 h-[100vh]">
-        <Link to="/" className="font-medium text-3xl text-white">
+    <div className="flex items-center w-full display">
+      <div className="self-start sticky top-0 bg-orange-500 py-5 px-4 h-[100vh] hidden sm:block">
+        <NavLink to="/" className="font-medium text-3xl text-white">
           Home
-        </Link>
+        </NavLink>
         <div className="">
           <ul className="mt-5 flex flex-col gap-5 text-white">
             <li>
-              <Link to="/admin/create-category">Create category</Link>
+              <NavLink to="/admin" className="font-medium text-gray-900">
+                Manage Products
+              </NavLink>
             </li>
             <li>
-              <Link to="/admin/add-products">Add Products</Link>
+              <NavLink
+                to="/admin/create-category"
+                className={({ isActive }) =>
+                  isActive ? "text-black" : "text-white"
+                }
+              >
+                Create category
+              </NavLink>
             </li>
             <li>
-              <Link>View Orders</Link>
+              <NavLink
+                to="/admin/add-products"
+                className={({ isActive }) =>
+                  isActive ? "text-black" : "text-white"
+                }
+              >
+                Add Products
+              </NavLink>
             </li>
             <li>
-              <Link>Manage Products</Link>
+              <NavLink
+                to="/admin/orders"
+                className={({ isActive }) =>
+                  isActive ? "text-black" : "text-white"
+                }
+              >
+                View Orders
+              </NavLink>
             </li>
           </ul>
         </div>
