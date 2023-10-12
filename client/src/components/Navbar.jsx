@@ -17,7 +17,7 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div className="bg-slate-950 text-white px-20 py-3 font-medium flex items-center justify-between">
+    <div className="bg-gray-200 text-black px-20 py-3 font-medium flex items-center justify-between">
       <div>
         <NavLink to="/">Home</NavLink>
       </div>
@@ -35,8 +35,8 @@ const Navbar = () => {
                 to={`${auth?.user?.role === 1 ? "/admin" : "/user/profile"}`}
                 className={
                   auth?.user?.role === 1
-                    ? "p-2 bg-green-700 rounded-lg"
-                    : "p-2 bg-orange-700 rounded-lg"
+                    ? "p-2 bg-orange-700 rounded-lg text-white"
+                    : "p-2 bg-orange-700 rounded-lg text-white"
                 }
               >
                 {auth?.user?.role === 1 ? "Admin" : `${auth?.user?.name}`}

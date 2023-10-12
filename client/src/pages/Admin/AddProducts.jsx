@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const AddProducts = () => {
   const [disable, setDisable] = useState(false);
   const [categories, setCategories] = useState();
+  const [error, setError] = useState();
   const [productFormData, setProductFormData] = useState({
     name: "",
     price: "",
@@ -33,6 +34,7 @@ const AddProducts = () => {
     }
   }, []);
 
+  console.log(categories);
   //* Handle the input fields state
   const onChangeHandler = (e) => {
     if (e.target.type === "text") {
@@ -94,6 +96,7 @@ const AddProducts = () => {
       navigate("/admin");
     } catch (error) {
       console.log(error);
+      setError(error.response.data.message);
     }
   };
 
@@ -110,6 +113,9 @@ const AddProducts = () => {
         >
           {productFormData.photo ? productFormData.photo.name : "Choose photo"} */}
         <div className="flex flex-col gap-1 w-full">
+          {error && (
+            <h5 className="text-center p-3 text-red-500 text-xl">{error}</h5>
+          )}
           <label htmlFor="">Product Image</label>
           <input
             id="photo"

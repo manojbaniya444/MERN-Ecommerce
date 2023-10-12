@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/authContext";
 import axios from "axios";
 import { useAppContext } from "../../context/globalContext";
+import EditProduct from "./EditProduct";
 
 const AdminIndex = () => {
   const [products, setProducts] = useState([]);
   const [change, setChange] = useState(false);
+  const [editProduct, setEditProduct] = useState({
+    id: "",
+    show: false,
+  });
+
   const { auth } = useAuthContext();
 
   const { setNotification } = useAppContext();
@@ -17,7 +23,7 @@ const AdminIndex = () => {
         "http://localhost:8080/products/all-products"
       );
       setProducts(response?.data?.products);
-      console.log(response?.data?.products);
+      // console.log(response?.data?.products);
     } catch (error) {
       console.log("Error fetching all products", error);
     }
@@ -50,6 +56,17 @@ const AdminIndex = () => {
     }
   };
 
+  if (editProduct.show && products.length > 0) {
+    return (
+      <EditProduct
+        editProduct={editProduct}
+        setEditProduct={setEditProduct}
+        setChange={setChange}
+        change={change}
+      />
+    );
+  }
+
   return (
     <div className="">
       {/* <div className="bg-black  flex gap-10 py-2 px-5 font-medium justify-between text-white">
@@ -65,7 +82,7 @@ const AdminIndex = () => {
                 Price
               </th>
               <th className="py-2 px-4 border-b border-gray-300 text-start">
-                Description
+                Name
               </th>
               <th className="py-2 px-4 border-b border-gray-300">Stock</th>
               <th className="py-2 px-4 border-b border-gray-300">Quantity</th>
@@ -88,7 +105,7 @@ const AdminIndex = () => {
                     Rs.{item?.price}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-300 text-start">
-                    {item?.description}
+                    {item?.name}
                   </td>
                   <td className={"py-2 px-4 border-b border-gray-300 "}>
                     <p
@@ -108,9 +125,19 @@ const AdminIndex = () => {
                     {item?.category?.name}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-300 ">
-                    <button className="p-2 text-white bg-orange-700 rounded-2xl">
+                    <button
+                      onClick={() =>
+                        setEditProduct({
+                          show: true,
+                          id: item?._id,
+                          cid: item?.category?._id,
+                        })
+                      }
+                      className="p-2 text-white bg-orange-700 rounded-2xl"
+                    >
                       Edit
                     </button>
+
                     <button
                       onClick={() =>
                         deleteProductHandler(item?._id, item?.name)

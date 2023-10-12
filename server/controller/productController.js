@@ -125,7 +125,7 @@ const updateProductController = async (req, res) => {
   try {
     const product = await ProductModel.findByIdAndUpdate(req.params.productId, {
       ...req.fields,
-      slug: slugify(name),
+      slug: slugify(req.fields.name),
     });
 
     if (!product) {
@@ -137,6 +137,7 @@ const updateProductController = async (req, res) => {
       product.photo.data = fs.readFileSync(photo.path);
       product.photo.contentType = photo.type;
     }
+
     await product.save();
     res
       .status(200)
@@ -145,7 +146,7 @@ const updateProductController = async (req, res) => {
     console.log(error);
     res
       .status(400)
-      .send({ success: false, message: "Catch product update", error });
+      .send({ success: false, message: "Catch product update", error, photo });
   }
 };
 
