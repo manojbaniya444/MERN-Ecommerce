@@ -75,7 +75,7 @@ const AdminIndex = () => {
       </div> */}
       <div className="  bg-gray-500 text-white">
         <table className="w-full border-collapse border border-gray-300 bg-white text-black text-center">
-          <thead className="bg-black text-white">
+          <thead className="bg-gray-200 text-black">
             <tr>
               <th className="py-2 px-4 border-b border-gray-300">Image</th>
               <th className="py-2 px-4 border-b border-gray-300 text-start">
@@ -93,38 +93,38 @@ const AdminIndex = () => {
           <tbody>
             {products?.map((item) => {
               return (
-                <tr key={item?._id} className="hover:bg-gray-100">
-                  <td className="py-2 px-4 border-b border-gray-300">
+                <tr key={item?._id} className="hover:bg-gray-100 text-sm">
+                  <td className="p-2 border-b border-gray-300">
                     <img
                       src={`http://localhost:8080/products/product-photo/${item?._id}`}
                       alt={item?.name}
                       className="h-16 w-16 object-cover"
                     />
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-300 text-start">
+                  <td className="p-2 border-b border-gray-300 text-start">
                     Rs.{item?.price}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-300 text-start">
+                  <td className="p-2 border-b border-gray-300 text-start text-sm w-[200px]">
                     {item?.name}
                   </td>
-                  <td className={"py-2 px-4 border-b border-gray-300 "}>
+                  <td className={" border-b border-gray-300 "}>
                     <p
                       className={
-                        item?.stock || item?.quantity > 0
-                          ? "p-1 bg-green-700 rounded-2xl text-white"
-                          : "p-1 bg-red-700 rounded-2xl text-white"
+                        item?.stock
+                          ? "p-1 bg-green-700 rounded-lg text-white"
+                          : "p-1 bg-red-700 rounded-lg text-white"
                       }
                     >
-                      {item?.stock ? "Yes" : "No"}
+                      {item?.stock ? "In stock" : "Out of stock"}
                     </p>
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-300">
+                  <td className="p-2 border-b border-gray-300">
                     {item?.quantity}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-300">
+                  <td className="p-2 border-b border-gray-300">
                     {item?.category?.name}
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-300 ">
+                  <td className="p-2 border-b border-gray-300 ">
                     <button
                       onClick={() =>
                         setEditProduct({
@@ -133,7 +133,7 @@ const AdminIndex = () => {
                           cid: item?.category?._id,
                         })
                       }
-                      className="p-2 text-white bg-orange-700 rounded-2xl"
+                      className="p-2 text-white bg-blue-700 rounded-2xl"
                     >
                       Edit
                     </button>
@@ -142,7 +142,7 @@ const AdminIndex = () => {
                       onClick={() =>
                         deleteProductHandler(item?._id, item?.name)
                       }
-                      className="p-2 text-white bg-red-900 rounded-2xl ml-2"
+                      className="p-2 text-white bg-red-700 rounded-2xl ml-2"
                     >
                       Delete
                     </button>

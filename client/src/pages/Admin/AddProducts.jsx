@@ -207,7 +207,7 @@ const AddProducts = () => {
         <div>
           <button
             type="submit"
-            className="bg-orange-600 text-white  py-2 px-5 rounded-lg cursor-pointer"
+            className="bg-blue-600 text-white  py-2 px-5 rounded-lg cursor-pointer"
           >
             Create product
           </button>

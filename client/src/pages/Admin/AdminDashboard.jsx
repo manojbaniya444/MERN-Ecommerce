@@ -4,14 +4,14 @@ import { NavLink, Outlet } from "react-router-dom";
 const AdminDashboard = () => {
   return (
     <div className="flex items-center w-full display">
-      <div className="self-start sticky top-0 bg-orange-500 py-5 px-4 h-[100vh] hidden sm:block">
+      <div className="self-start sticky top-0 bg-blue-700 py-5 px-4 h-[100vh] hidden sm:block">
         <NavLink to="/" className="font-medium text-3xl text-white">
           Home
         </NavLink>
         <div className="">
           <ul className="mt-5 flex flex-col gap-5 text-white">
             <li>
-              <NavLink to="/admin" className="font-medium text-gray-900">
+              <NavLink to="/admin" className="font-bold text-gray-400">
                 Manage Products
               </NavLink>
             </li>
@@ -19,7 +19,7 @@ const AdminDashboard = () => {
               <NavLink
                 to="/admin/create-category"
                 className={({ isActive }) =>
-                  isActive ? "text-black" : "text-white"
+                  isActive ? "text-black font-medium" : "text-white"
                 }
               >
                 Create category
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
               <NavLink
                 to="/admin/add-products"
                 className={({ isActive }) =>
-                  isActive ? "text-black" : "text-white"
+                  isActive ? "text-black font-medium" : "text-white"
                 }
               >
                 Add Products
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
               <NavLink
                 to="/admin/orders"
                 className={({ isActive }) =>
-                  isActive ? "text-black" : "text-white"
+                  isActive ? "text-black font-medium" : "text-white"
                 }
               >
                 View Orders

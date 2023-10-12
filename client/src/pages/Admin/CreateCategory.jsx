@@ -56,14 +56,18 @@ const CreateCategory = () => {
 
   //* Delete Category
   const deleteCategoryHandler = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:8080/category/delete-category/${id}`
-      );
-      setChange(!change);
-    } catch (error) {
-      console.log(error, "Category error");
-    }
+    let answer = prompt("Are you sure want to delete ? Type [yes] to confirm");
+
+    if (answer === "yes") {
+      try {
+        const response = await axios.delete(
+          `http://localhost:8080/category/delete-category/${id}`
+        );
+        setChange(!change);
+      } catch (error) {
+        console.log(error, "Category error");
+      }
+    } else return;
   };
 
   //* Edit Category
@@ -107,7 +111,7 @@ const CreateCategory = () => {
             />
             <button
               type="submit"
-              className="border border-solid px-4 py-2 bg-orange-900 text-white cursor-pointer rounded-lg"
+              className="border border-solid px-4 py-2 bg-blue-900 text-white cursor-pointer rounded-lg"
             >
               Update
             </button>
@@ -132,7 +136,7 @@ const CreateCategory = () => {
             />
             <button
               type="submit"
-              className="border border-solid rounded-sm px-4 py-2 bg-orange-400 text-white cursor-pointer"
+              className="border border-solid rounded-lg px-4 py-2 bg-blue-400 text-white cursor-pointer"
             >
               Create
             </button>
@@ -164,14 +168,14 @@ const CreateCategory = () => {
                   onClick={() =>
                     setEdit({ name: item?.name, show: true, id: item?._id })
                   }
-                  className="p-2 cursor-pointer bg-orange-700 text-white rounded-md"
+                  className="p-2 cursor-pointer bg-blue-700 text-white rounded-md"
                 >
                   Edit
                 </button>
               )}
               <button
                 onClick={() => deleteCategoryHandler(item?._id)}
-                className="p-2 cursor-pointer bg-orange-900 text-white rounded-md"
+                className="p-2 cursor-pointer bg-red-600 text-white rounded-md"
               >
                 Delete
               </button>

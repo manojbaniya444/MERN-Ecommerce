@@ -168,7 +168,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
           </div>
           <button
             type="submit"
-            className="p-3 bg-orange-700 text-white rounded-md cursor-pointer "
+            className="p-3 bg-blue-700 text-white rounded-md cursor-pointer "
           >
             Update product
           </button>

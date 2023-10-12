@@ -96,7 +96,7 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-orange-600 px-5 py-2 rounded-md cursor-pointer"
+              className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
             >
               {delay ? (
                 <ClipLoader
