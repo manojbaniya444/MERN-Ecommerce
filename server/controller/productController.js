@@ -96,7 +96,7 @@ const getPhotoController = async (req, res) => {
 const singleProductController = async (req, res) => {
   const { productId } = req.params;
 
-  const product = await ProductModel.findById(productId);
+  const product = await ProductModel.findById(productId).select({ photo: 0 });
 
   if (!product) {
     return res
@@ -175,6 +175,29 @@ const deleteProductController = async (req, res) => {
   }
 };
 
+//* Get similar products based on category
+
+const similarProductController = async (req, res) => {
+  const productId = req.params.productId;
+  const categoryId = req.params.categoryId;
+
+  try {
+    const products = await ProductModel.find({
+      category: categoryId,
+      _id: { $ne: productId },
+    }).select({ photo: 0 });
+
+    res
+      .status(200)
+      .send({ success: true, message: "Similar products", products });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(400)
+      .send({ success: false, message: "Similar products fetch false", error });
+  }
+};
+
 module.exports = {
   createProductController,
   allProductsController,
@@ -182,4 +205,5 @@ module.exports = {
   updateProductController,
   deleteProductController,
   getPhotoController,
+  similarProductController,
 };

@@ -20,7 +20,7 @@ const Navbar = () => {
         <LogoutModal showModal={showModal} setShowModal={setShowModal} />
       )}
 
-      <div className="bg-blue-900 text-white px-2 md:px-10 py-3 font-light text-sm md:text-md md:font-medium flex items-center justify-between">
+      <div className="bg-blue-900 text-white px-2 md:px-10 py-3 font-light text-sm md:text-md md:font-medium flex items-center justify-between sticky top-0 w-full z-10">
         <div>
           <NavLink to="/">Home</NavLink>
         </div>

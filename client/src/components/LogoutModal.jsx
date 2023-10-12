@@ -17,7 +17,7 @@ const LogoutModal = ({ showModal, setShowModal }) => {
     navigate("/login");
   };
   return (
-    <div className="flex flex-col p-9 bg-black text-white  items-center w-[30%] fixed ml-[50%] -translate-x-[50%] top-5 z-100 rounded-lg">
+    <div className="flex flex-col p-9 bg-black text-white  items-center w-[30%] fixed ml-[50%] -translate-x-[50%] top-5 z-20 rounded-lg">
       <p className="text-center font-medium text-xl">
         Are you sure want to log out?
       </p>

@@ -16,6 +16,7 @@ import Notification from "./components/Notification";
 
 import { useAppContext } from "./context/globalContext";
 import AdminIndex from "./pages/Admin/AdminIndex";
+import SingleProduct from "./components/SingleProduct";
 
 const App = () => {
   const { notification } = useAppContext();
@@ -26,6 +27,10 @@ const App = () => {
 
       <Routes>
         <Route path="/" exact element={<Home />} />
+        <Route
+          path="/single-product/:productId"
+          element={<SingleProduct />}
+        />
 
         <Route
           path="/user"

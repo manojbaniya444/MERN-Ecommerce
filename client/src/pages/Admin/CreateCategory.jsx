@@ -55,8 +55,10 @@ const CreateCategory = () => {
   }, [change]);
 
   //* Delete Category
-  const deleteCategoryHandler = async (id) => {
-    let answer = prompt("Are you sure want to delete ? Type [yes] to confirm");
+  const deleteCategoryHandler = async (id, name) => {
+    let answer = prompt(
+      `Are you sure want to delete '${name}'? Type [yes] to confirm`
+    );
 
     if (answer === "yes") {
       try {
@@ -174,7 +176,7 @@ const CreateCategory = () => {
                 </button>
               )}
               <button
-                onClick={() => deleteCategoryHandler(item?._id)}
+                onClick={() => deleteCategoryHandler(item?._id, item?.name)}
                 className="p-2 cursor-pointer bg-red-600 text-white rounded-md"
               >
                 Delete
