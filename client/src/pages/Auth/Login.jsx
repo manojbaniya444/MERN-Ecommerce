@@ -56,7 +56,7 @@ const Login = () => {
   return (
     <div>
       <Link to="/" className="m-5 text-3xl font-bold">
-        Home
+        M-Store
       </Link>
       <h2 className="text-center mt-5 text-2xl">Login</h2>
       {errorMessage && (

@@ -39,7 +39,7 @@ const Register = () => {
   return (
     <>
       <Link to="/" className="m-5 text-3xl font-bold">
-        Home
+        M-Store
       </Link>
       <h2 className="text-center mt-5 text-2xl">Register</h2>
       <div className="flex items-center justify-center mt-2">

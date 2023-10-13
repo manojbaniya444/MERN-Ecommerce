@@ -6,13 +6,14 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ProtectedUserRoute from "./pages/Routes/ProtectedUserRoute";
-import Dashboard from "./pages/Dashboard";
-import UserDashboard from "./components/UserDashboard";
+import Dashboard from "./pages/user/Dashboard";
+import UserDashboard from "./pages/user/UserDashboard";
 import ProtectedAdminRoute from "./pages/Routes/ProtectedAdminRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import AddProducts from "./pages/Admin/AddProducts";
 import Notification from "./components/Notification";
+import Search from "./pages/Search";
 
 import { useAppContext } from "./context/globalContext";
 import AdminIndex from "./pages/Admin/AdminIndex";
@@ -27,10 +28,8 @@ const App = () => {
 
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route
-          path="/single-product/:productId"
-          element={<SingleProduct />}
-        />
+        <Route path="/search" element={<Search />} />
+        <Route path="/single-product/:productId" element={<SingleProduct />} />
 
         <Route
           path="/user"

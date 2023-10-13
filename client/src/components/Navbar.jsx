@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import LogoutModal from "./LogoutModal";
+import { useAppContext } from "../context/globalContext";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const { auth, setAuth } = useAuthContext();
 
+  const { search, setSearch } = useAppContext();
+
   const logoutHandler = () => {
     setShowModal(true);
-    // setAuth(null);
-    // localStorage.removeItem("auth");
-    // setNotification({ show: true, message: "Logged out." });
-    // navigate("/login");
   };
+
   return (
     <>
       {showModal && (
@@ -21,10 +21,28 @@ const Navbar = () => {
       )}
 
       <div className="bg-blue-900 text-white px-2 md:px-10 py-3 font-light text-sm md:text-md md:font-medium flex items-center justify-between sticky top-0 w-full z-10">
-        <div>
-          <NavLink to="/">Home</NavLink>
+        {/* Base */}
+        <div onClick={() => setSearch("")}>
+          <NavLink to="/">
+            <p className="text-base md:text-lg font-black">M-Store</p>
+          </NavLink>
         </div>
-        <div className="ml-20">
+
+        {/* Search */}
+        <div className="flex-1 flex justify-center items-center">
+          <input
+            type="text"
+            placeholder="Search products..."
+            name="search"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            className="p-2 w-3/4 rounded-lg text-black font-medium outline-none"
+          />
+        </div>
+
+        {/* Nav */}
+
+        <div className="">
           {auth ? (
             <ul className="flex flex-row items-center gap-[40px]">
               <li className="cursor-pointer" onClick={logoutHandler}>

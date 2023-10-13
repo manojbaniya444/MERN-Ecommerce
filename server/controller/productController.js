@@ -47,7 +47,7 @@ const allProductsController = async (req, res) => {
   try {
     const products = await ProductModel.find({})
       .select({ photo: 0 })
-      .limit(10)
+      // .limit(10)
       .populate("category")
       .sort({ createdAt: -1 });
     if (!products) {
@@ -198,6 +198,81 @@ const similarProductController = async (req, res) => {
   }
 };
 
+//* Filter products controller
+
+// {
+//   category: ["6527cea8197336080a36f2b8"],
+//   $and: [{ price: { $gt: 15000 } }, { price: { $lte: 25000 } }],
+// }
+
+const filterProductsController = async (req, res) => {
+  const { category, price } = req.body;
+  try {
+    const products = await ProductModel.find({
+      $and: [
+        category && category.length > 0
+          ? {
+              category: { $in: category },
+            }
+          : {},
+        {
+          price: {
+            $gte: price.min,
+            $lte: price.max,
+          },
+        },
+      ],
+    }).select({
+      photo: 0,
+    });
+    res.status(200).send({
+      success: true,
+      message: "Filtered products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(400)
+      .send({ success: false, message: "Error filter products", error });
+  }
+};
+
+//Get search products
+const searchProductsController = async (req, res) => {
+  const searchQuery = req.body.search;
+  try {
+    const products = await ProductModel.find({
+      $or: [
+        {
+          name: {
+            $regex: searchQuery,
+            $options: "i",
+          },
+        },
+        {
+          description: {
+            $regex: searchQuery,
+            $options: "i",
+          },
+        },
+      ],
+    }).select({ photo: 0 });
+    if (!products) {
+      return res.status(200).send({ success: false, message: "No products" });
+    }
+    res
+      .status(200)
+      .send({ success: true, message: "Search product results", products });
+  } catch (error) {
+    res.status(400).send({
+      success: false,
+      message: "Failed fetching search products",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createProductController,
   allProductsController,
@@ -206,4 +281,6 @@ module.exports = {
   deleteProductController,
   getPhotoController,
   similarProductController,
+  filterProductsController,
+  searchProductsController,
 };

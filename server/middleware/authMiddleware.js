@@ -8,6 +8,7 @@ const JWT_SECRET = process.env.ACCESS_SECRET;
 const verifyAuthentication = async (req, res, next) => {
   try {
     const decoded = JWT.verify(req.headers.authorization, JWT_SECRET);
+    // authentication and decoded value in the user
     req.user = decoded;
     next();
   } catch (error) {

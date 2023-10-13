@@ -1,31 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
 
-const AllProducts = () => {
-  const [products, setProducts] = useState();
-
+const FilteredProducts = ({ products }) => {
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
-
-  useEffect(() => {
-    try {
-      const fetchAllProducts = async () => {
-        const response = await axios.get(
-          "http://localhost:8080/products/all-products"
-        );
-
-        if (response) {
-          setProducts(response.data.products);
-        }
-      };
-      fetchAllProducts();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   //* Add cart Handler
 
@@ -42,11 +22,10 @@ const AllProducts = () => {
     }
   };
 
-  //   console.log(products);
   return (
     <div className="flex-1 p-2 mt-[199px] md:mt-[120px]">
       <h1 className="text-center text-sm md:text-xl lg:text-2xl font-medium">
-        All Products
+        Filtered products
       </h1>
       <section className="flex gap-3 mt-5 flex-wrap p-1 md:p-5 bg-gray-0 rounded-lg items-center justify-center bg-gray-50">
         {products?.map((item) => {
@@ -89,4 +68,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default FilteredProducts;

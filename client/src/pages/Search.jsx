@@ -1,31 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
 
-const AllProducts = () => {
-  const [products, setProducts] = useState();
-
+const Search = ({ products }) => {
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
-
-  useEffect(() => {
-    try {
-      const fetchAllProducts = async () => {
-        const response = await axios.get(
-          "http://localhost:8080/products/all-products"
-        );
-
-        if (response) {
-          setProducts(response.data.products);
-        }
-      };
-      fetchAllProducts();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   //* Add cart Handler
 
@@ -41,12 +21,23 @@ const AllProducts = () => {
       });
     }
   };
-
-  //   console.log(products);
+  if (products?.length === 0) {
+    return (
+      <div className="flex flex-col items-center jsutify-center">
+        <h1 className="text-center p-9 text-sm md:text-lg font-medium">
+          No search results
+        </h1>
+        <div className="flex items-center flex-col justify-center bg-blue-200 w-20 h-20 rounded-[50%] font-bold text-xl">
+          <p>. .</p>
+          <p>____</p>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="flex-1 p-2 mt-[199px] md:mt-[120px]">
+    <div className="flex-1 p-2 mt-[20px] md:mt-[20px]">
       <h1 className="text-center text-sm md:text-xl lg:text-2xl font-medium">
-        All Products
+        Search results
       </h1>
       <section className="flex gap-3 mt-5 flex-wrap p-1 md:p-5 bg-gray-0 rounded-lg items-center justify-center bg-gray-50">
         {products?.map((item) => {
@@ -89,4 +80,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default Search;
