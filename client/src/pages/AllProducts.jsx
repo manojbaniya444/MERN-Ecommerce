@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
+import { useCartContext } from "../context/cartContext";
 
 const AllProducts = () => {
   const [products, setProducts] = useState();
 
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
+  const { cartItems, setCartItems } = useCartContext();
 
   useEffect(() => {
     try {
@@ -29,7 +31,8 @@ const AllProducts = () => {
 
   //* Add cart Handler
 
-  const addCartHandler = () => {
+  const addCartHandler = (product) => {
+    let duplicateItem = [];
     if (!auth) {
       return setNotification({ show: true, message: "First login" });
     }
@@ -40,6 +43,21 @@ const AllProducts = () => {
         message: "You are Admin :( login with user account.",
       });
     }
+    //* Main add to cart logic
+    duplicateItem = cartItems.find((item) => item._id === product._id);
+    if (duplicateItem) {
+      setNotification({
+        show: true,
+        message: "Item is already in the cart",
+      });
+      return;
+    }
+    setCartItems([...cartItems, product]);
+    localStorage.setItem("cart", JSON.stringify([...cartItems, product]));
+    setNotification({
+      show: true,
+      message: `${product?.name} added to the cart`,
+    });
   };
 
   //   console.log(products);
@@ -75,7 +93,7 @@ const AllProducts = () => {
               </Link>
               <div className="p-3">
                 <button
-                  onClick={addCartHandler}
+                  onClick={() => addCartHandler(item)}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded-lg self-start"
                 >
                   Add to Cart

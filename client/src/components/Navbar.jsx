@@ -3,12 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import LogoutModal from "./LogoutModal";
 import { useAppContext } from "../context/globalContext";
+import { useCartContext } from "../context/cartContext";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const { auth, setAuth } = useAuthContext();
 
   const { search, setSearch } = useAppContext();
+  const { cartItems } = useCartContext();
 
   const logoutHandler = () => {
     setShowModal(true);
@@ -62,6 +64,14 @@ const Navbar = () => {
                 >
                   {auth?.user?.role === 1 ? "Admin" : `${auth?.user?.name}`}
                 </Link>
+              </li>
+              <li className="relative">
+                <NavLink className="p-2 bg-blue-700 rounded-2xl" to="/cart">
+                  Cart
+                </NavLink>
+                <p className="absolute -top-4 bg-blue-400 text-black font-thin px-2 rounded-[50%] -right-3 text-lg">
+                  {cartItems?.length}
+                </p>
               </li>
             </ul>
           ) : (

@@ -18,6 +18,7 @@ import Search from "./pages/Search";
 import { useAppContext } from "./context/globalContext";
 import AdminIndex from "./pages/Admin/AdminIndex";
 import SingleProduct from "./components/SingleProduct";
+import Cart from "./pages/user/Cart";
 
 const App = () => {
   const { notification } = useAppContext();
@@ -25,11 +26,11 @@ const App = () => {
   return (
     <BrowserRouter>
       {notification.show && <Notification notification={notification} />}
-
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/single-product/:productId" element={<SingleProduct />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route
           path="/user"

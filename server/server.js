@@ -6,6 +6,7 @@ const userRoutes = require("./Routes/userRoutes");
 const testRoutes = require("./Routes/testRoutes");
 const categoryRoutes = require("./Routes/categoryRoutes");
 const productRoute = require("./Routes/productRoutes");
+const cartRoutes = require("./Routes/cartRoutes");
 
 const {
   verifyAdmin,
@@ -24,6 +25,7 @@ app.use("/users", userRoutes);
 app.use("/test", verifyAuthentication, verifyAdmin, testRoutes);
 app.use("/category", categoryRoutes);
 app.use("/products", productRoute);
+app.use("/cart", cartRoutes);
 
 //! Connect to the mongo database and start the server
 mongoose

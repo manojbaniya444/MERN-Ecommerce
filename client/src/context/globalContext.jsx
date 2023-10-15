@@ -16,7 +16,7 @@ export const AppProvider = ({ children }) => {
     }, 2000);
 
     return () => clearTimeout(timeout);
-  }, [notification.show]);
+  }, [notification.show, notification.message]);
 
   //* Fetch search products
   const fetchSearchProducts = async () => {
@@ -41,8 +41,6 @@ export const AppProvider = ({ children }) => {
       clearTimeout(timeout);
     };
   }, [search]);
-
-  console.log(searchProducts);
 
   return (
     <AppContext.Provider

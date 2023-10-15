@@ -89,6 +89,11 @@ const SingleProduct = () => {
           >
             {product?.stock ? "Available" : "Out of stock"}
           </h3>
+          {product?.stock ? (
+            <h3 className="py-2 text-gray-900 font-light">
+              {product?.quantity} items remaining
+            </h3>
+          ) : null}
           <button
             onClick={addCartHandler}
             className="bg-blue-600 text-white px-5 py-2 cursor-pointer rounded-lg mt-5"

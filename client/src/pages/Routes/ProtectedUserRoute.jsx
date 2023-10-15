@@ -23,8 +23,6 @@ const ProtectedUserRoute = ({ children }) => {
 
     if (auth?.token) checkAuth();
   }, [auth?.token]);
-
-  console.log(userVerified);
   return userVerified ? children : <Loader />;
 };
 
