@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setNotification({ ...notification, show: false, message: "" });
+      setNotification({ ...notification, show: false, message: "", type: "" });
     }, 2000);
 
     return () => clearTimeout(timeout);

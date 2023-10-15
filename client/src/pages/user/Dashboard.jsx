@@ -13,7 +13,7 @@ const Dashboard = () => {
           <Link to="/user/profile">User Profile</Link>
         </li>
         <li className="p-4 bg-blue-600 text-white rounded-sm cursor-pointer">
-          <Link to="/user/orders">Orders</Link>
+          <Link to="/user/orders">My Orders</Link>
         </li>
       </ul>
       <Outlet />

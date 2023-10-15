@@ -2,14 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
+import { useCartContext } from "../context/cartContext";
 
 const Search = ({ products }) => {
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
+  const { addCartHandler } = useCartContext();
 
   //* Add cart Handler
 
-  const addCartHandler = () => {
+  const addCart = (product) => {
     if (!auth) {
       return setNotification({ show: true, message: "First login" });
     }
@@ -20,6 +22,7 @@ const Search = ({ products }) => {
         message: "You are Admin :( login with user account.",
       });
     }
+    addCartHandler(product);
   };
   if (products?.length === 0) {
     return (
@@ -66,7 +69,7 @@ const Search = ({ products }) => {
               </Link>
               <div className="p-3">
                 <button
-                  onClick={addCartHandler}
+                  onClick={() => addCart(item)}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded-lg self-start"
                 >
                   Add to Cart

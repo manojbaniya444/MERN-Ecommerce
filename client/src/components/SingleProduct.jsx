@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
+import { useCartContext } from "../context/cartContext";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState();
@@ -15,6 +16,7 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
+  const { addCartHandler } = useCartContext();
 
   //* Fetch single product
 
@@ -51,7 +53,7 @@ const SingleProduct = () => {
 
   // * Cart functionality
 
-  const addCartHandler = () => {
+  const addCart = (product) => {
     if (!auth) {
       return setNotification({ show: true, message: "First login" });
     }
@@ -61,6 +63,7 @@ const SingleProduct = () => {
         message: "You are Admin :( login with user account.",
       });
     }
+    addCartHandler(product);
   };
 
   return (
@@ -95,7 +98,7 @@ const SingleProduct = () => {
             </h3>
           ) : null}
           <button
-            onClick={addCartHandler}
+            onClick={() => addCart(product)}
             className="bg-blue-600 text-white px-5 py-2 cursor-pointer rounded-lg mt-5"
           >
             Add to cart

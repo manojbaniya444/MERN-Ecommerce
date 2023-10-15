@@ -93,7 +93,7 @@ const Cart = () => {
               <button
                 onClick={() => setOrderModal(true)}
                 className="px-5 py-2 bg-blue-700 text-white rounded-md"
-                disabled={cartItems.length === 0}
+                disabled={cartItems?.length === 0}
               >
                 Checkout
               </button>

@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/authContext";
 import LogoutModal from "./LogoutModal";
 import { useAppContext } from "../context/globalContext";
 import { useCartContext } from "../context/cartContext";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
 
   const { search, setSearch } = useAppContext();
   const { cartItems } = useCartContext();
+  const location = useLocation();
 
   const logoutHandler = () => {
     setShowModal(true);
@@ -31,16 +33,18 @@ const Navbar = () => {
         </div>
 
         {/* Search */}
-        <div className="flex-1 flex justify-center items-center">
-          <input
-            type="text"
-            placeholder="Search products..."
-            name="search"
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
-            className="p-2 w-3/4 rounded-lg text-black font-medium outline-none"
-          />
-        </div>
+        {location.pathname.includes("/single-product") ? null : (
+          <div className="flex-1 flex justify-center items-center">
+            <input
+              type="text"
+              placeholder="Search products..."
+              name="search"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+              className="p-2 w-3/4 rounded-lg text-black font-medium outline-none"
+            />
+          </div>
+        )}
 
         {/* Nav */}
 

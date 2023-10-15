@@ -42,6 +42,7 @@ const Login = () => {
           ...notification,
           show: true,
           message: "Successfully log in",
+          type: "success",
         });
         navigate("/");
       }, 700);

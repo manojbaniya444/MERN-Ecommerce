@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCartContext } from "../../context/cartContext";
 import { useAuthContext } from "../../context/authContext";
 import { useAppContext } from "../../context/globalContext";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const OrderModal = ({ setOrderModal, total }) => {
+  const [loading, setLoading] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     products: [],
     customer: "",
@@ -12,26 +15,31 @@ const OrderModal = ({ setOrderModal, total }) => {
     contact: "",
     totalAmount: "",
   });
-  const { cartItems } = useCartContext();
+  const { cartItems, setCartItems } = useCartContext();
   const { auth } = useAuthContext();
   const { setNotification } = useAppContext();
 
-  const placeOrderHandler = async (event) => {
-    event.preventDefault();
-    console.log(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
     setOrderDetails({
       ...orderDetails,
       products: cartItems?.map((item) => item._id),
       totalAmount: total,
       customer: auth?.user?._id,
     });
+  }, []);
+
+  const placeOrderHandler = async (event) => {
+    event.preventDefault();
+    console.log(auth);
 
     try {
-      console.log(orderDetails);
       const response = await axios.post(
         "http://localhost:8080/cart/orders",
         orderDetails
       );
+
       if (response?.data.success) {
         setNotification({
           show: true,
@@ -44,6 +52,9 @@ const OrderModal = ({ setOrderModal, total }) => {
           contact: "",
           totalAmount: "",
         });
+        localStorage.removeItem("cart");
+        setCartItems([]);
+        navigate("/");
       }
     } catch (error) {
       console.log("Catch error", error);

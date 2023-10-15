@@ -12,7 +12,7 @@ const LogoutModal = ({ showModal, setShowModal }) => {
   const logoutConfirmHandler = () => {
     setAuth(null);
     localStorage.removeItem("auth");
-    setNotification({ show: true, message: "Logged out." });
+    setNotification({ show: true, message: "Logged out.", type: "success" });
     setShowModal(false);
     navigate("/login");
   };
