@@ -19,6 +19,8 @@ import { useAppContext } from "./context/globalContext";
 import AdminIndex from "./pages/Admin/AdminIndex";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./pages/user/Cart";
+import TrackOrder from "./pages/user/TrackOrder";
+import Orders from "./pages/Admin/Orders";
 
 const App = () => {
   const { notification } = useAppContext();
@@ -41,6 +43,7 @@ const App = () => {
           }
         >
           <Route path="profile" element={<UserDashboard />} />
+          <Route path="my-orders" element={<TrackOrder />} />
         </Route>
 
         <Route
@@ -54,6 +57,7 @@ const App = () => {
           <Route index element={<AdminIndex />} />
           <Route path="create-category" element={<CreateCategory />} />
           <Route path="add-products" element={<AddProducts />} />
+          <Route path="manage-orders" element={<Orders />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

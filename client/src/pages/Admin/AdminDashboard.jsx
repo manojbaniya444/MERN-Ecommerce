@@ -37,7 +37,7 @@ const AdminDashboard = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/orders"
+                to="/admin/manage-orders"
                 className={({ isActive }) =>
                   isActive ? "text-black font-medium" : "text-white"
                 }

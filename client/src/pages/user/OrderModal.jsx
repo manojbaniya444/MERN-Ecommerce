@@ -10,6 +10,7 @@ const OrderModal = ({ setOrderModal, total }) => {
   const [loading, setLoading] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     products: [],
+    items: [],
     customer: "",
     address: "",
     contact: "",
@@ -25,6 +26,7 @@ const OrderModal = ({ setOrderModal, total }) => {
     setOrderDetails({
       ...orderDetails,
       products: cartItems?.map((item) => item._id),
+      items: cartItems?.map((item) => item?.name),
       totalAmount: total,
       customer: auth?.user?._id,
     });
@@ -47,6 +49,7 @@ const OrderModal = ({ setOrderModal, total }) => {
         });
         setOrderDetails({
           products: [],
+          items: [],
           customer: "",
           address: "",
           contact: "",

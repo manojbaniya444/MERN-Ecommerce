@@ -9,6 +9,12 @@ const orderSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    items: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     customer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
@@ -24,6 +30,10 @@ const orderSchema = new mongoose.Schema(
     },
     totalAmount: {
       type: Number,
+      required: true,
+    },
+    date: {
+      type: Date,
       required: true,
     },
     status: {
