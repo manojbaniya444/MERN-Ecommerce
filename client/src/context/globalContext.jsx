@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [notification, setNotification] = useState({
     show: false,
     message: "",
+    type: "",
   });
 
   useEffect(() => {

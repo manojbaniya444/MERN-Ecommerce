@@ -47,8 +47,9 @@ const getMyOrder = async (req, res) => {
     const uid = req.params.id;
     if (uid) {
       const userOrder = await orderModel
-        .find({ customer: uid })
+        .find({ customer: uid, status: { $ne: "Delivered" } })
         .sort({ createdAt: 1 });
+
       if (!userOrder) {
         return res.status(200).send({ userOrder: [] });
       }
@@ -98,9 +99,44 @@ const statusChangeHandler = async (req, res) => {
   }
 };
 
+const getDeliveredUserOrder = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const orders = await orderModel.find({ customer: id, status: "Delivered" });
+    res
+      .status(200)
+      .send({ success: true, message: "Delivered items.", orders });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      messsage: "Error getting delivered items",
+      error,
+    });
+  }
+};
+
+const getAllDeliveredItems = async (req, res) => {
+  try {
+    const orders = await orderModel.find({ status: "Delivered" });
+    res
+      .status(200)
+      .send({ success: true, message: "All delivered items.", orders });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      messsage: "Error getting all delivered items",
+      error,
+    });
+  }
+};
+
 module.exports = {
   newOrderController,
   getMyOrder,
   getAllOrders,
   statusChangeHandler,
+  getAllDeliveredItems,
+  getDeliveredUserOrder,
 };

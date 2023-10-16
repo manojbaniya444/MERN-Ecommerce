@@ -57,7 +57,7 @@ const OrderModal = ({ setOrderModal, total }) => {
         });
         localStorage.removeItem("cart");
         setCartItems([]);
-        navigate("/");
+        navigate("/user/my-orders");
       }
     } catch (error) {
       console.log("Catch error", error);
@@ -67,7 +67,7 @@ const OrderModal = ({ setOrderModal, total }) => {
   return (
     <section className="h-[100%] w-[100%] absolute z-10 bg-black bg-opacity-60 flex justify-center items-center">
       <form
-        onSubmit={placeOrderHandler}
+        onSubmit={(event) => placeOrderHandler(event)}
         className=" bg-white shadow-lg p-5 rounded-md w-[90%] md:w-[60%] self-center flex flex-col gap-2 relative"
       >
         <button
@@ -97,6 +97,7 @@ const OrderModal = ({ setOrderModal, total }) => {
           <input
             type="text"
             required
+            autoComplete="off"
             placeholder="Enter shipping address"
             className="bg-gray-100 p-2 rounded-lg"
             value={orderDetails.address}
@@ -110,6 +111,7 @@ const OrderModal = ({ setOrderModal, total }) => {
           <input
             type="number"
             required
+            autoComplete="off"
             placeholder="Enter receivers contact details"
             className="bg-gray-100 p-2 rounded-lg"
             value={orderDetails.contact}

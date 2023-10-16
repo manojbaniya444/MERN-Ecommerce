@@ -68,7 +68,7 @@ const Orders = () => {
                 Id: <span className="text-orange-500">{item?._id}</span>
               </p>
               <p>
-                Customer Id:{" "}
+                Customer Id:
                 <span className="text-green-500">{item?.customer}</span>
               </p>
               <div>
@@ -84,7 +84,27 @@ const Orders = () => {
               <p>COD Amount: {item?.totalAmount}</p>
               <p>Location: {item?.address}</p>
               <p>Contact no: {item?.contact}</p>
+              <p>Order date: {item?.date}</p>
               <p>Status:</p>
+              <p
+                className={
+                  item?.status === "Processing"
+                    ? "w-full self-start bg-orange-500 p-1 rounded-sm text-white"
+                    : item?.status === "Dispatched"
+                    ? "w-full self-start bg-blue-900 p-1 rounded-sm text-white"
+                    : item?.status === "Your package is on the way"
+                    ? "w-full self-start bg-violet-500 p-1 rounded-sm text-white"
+                    : "w-full self-start bg-green-500 p-1 rounded-sm text-white"
+                }
+              >
+                {item?.status === "Processing"
+                  ? "User has placed an order"
+                  : item?.status === "Dispatched"
+                  ? "Item dispatched"
+                  : item?.status === "Your package is on the way"
+                  ? "Package is on the way to the customer"
+                  : "Customer has received the package"}
+              </p>
               <select
                 defaultValue={item?.status}
                 className="p-2 cursor-pointer rounded-md"

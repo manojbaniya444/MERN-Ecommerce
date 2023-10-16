@@ -6,6 +6,8 @@ const {
   getMyOrder,
   getAllOrders,
   statusChangeHandler,
+  getAllDeliveredItems,
+  getDeliveredUserOrder,
 } = require("../controller/orderController");
 const {
   verifyAuthentication,
@@ -16,6 +18,13 @@ const {
 router.post("/orders", verifyAuthentication, verifyUser, newOrderController);
 router.get("/my-order/:id", getMyOrder);
 router.get("/all-orders", getAllOrders);
+router.get("/delivered-orders", getAllDeliveredItems);
+router.get(
+  "/delivered/:id",
+  // verifyAuthentication,
+  // verifyUser,
+  getDeliveredUserOrder
+);
 router.patch(
   "/status-change/:id",
   verifyAuthentication,

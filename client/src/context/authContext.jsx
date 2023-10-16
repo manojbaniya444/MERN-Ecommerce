@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
+  const [authLoading, setAuthLoading] = useState(false);
 
   //Default headers
   axios.defaults.headers.common["Authorization"] = auth?.token;
@@ -28,6 +29,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         auth,
         setAuth,
+        authLoading,
+        setAuthLoading,
       }}
     >
       {children}

@@ -173,6 +173,13 @@ const Home = () => {
             </button>
           </div>
         </div>
+        <div className="w-full mt-[70px] h-[300px]">
+          <img
+            src="/banner12.jpeg"
+            alt="banner-image"
+            className="w-full object-cover h-full"
+          />
+        </div>
         {filteredProducts?.length > 0 ? (
           <FilteredProducts products={filteredProducts} />
         ) : (

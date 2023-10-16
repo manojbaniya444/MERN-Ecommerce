@@ -75,6 +75,7 @@ const Login = () => {
             <input
               className="p-3 rounded-sm text-black"
               type="email"
+              autoComplete="off"
               placeholder="Enter email"
               required
               onChange={(e) => setEmail(e.target.value)}
@@ -87,6 +88,7 @@ const Login = () => {
             <input
               className="p-3 rounded-sm text-black"
               type="password"
+              autoComplete="off"
               placeholder="Enter password"
               required
               onChange={(e) => setPassword(e.target.value)}

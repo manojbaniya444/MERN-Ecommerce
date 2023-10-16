@@ -16,6 +16,9 @@ const Dashboard = () => {
           <li className="p-4 bg-blue-600 text-white rounded-sm cursor-pointer">
             <Link to="/user/my-orders">My Orders</Link>
           </li>
+          <li className="p-4 bg-blue-600 text-white rounded-sm cursor-pointer">
+            <Link to="/user/order-history">Order History</Link>
+          </li>
         </ul>
       </div>
       <Outlet />

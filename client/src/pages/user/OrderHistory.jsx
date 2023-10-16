@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/authContext";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const TrackOrder = () => {
-  const [myOrders, setMyOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
+const OrderHistory = () => {
+  const [deliveredOrders, setDeliveredOrders] = useState();
+  const [loading, setLoading] = useState();
+
   const { auth } = useAuthContext();
 
-  useEffect(() => {
-    const fetchMyOrders = async () => {
-      const uid = auth?.user?._id;
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:8080/cart/my-order/${uid}`
-        );
-        if (response) {
-          setMyOrders(response.data.userOrder);
-          setLoading(false);
-        }
-      } catch (error) {
+  const fetchDeliveredOrders = async () => {
+    console.log("heleo");
+    try {
+      setLoading(true);
+      const id = auth?.user._id;
+      const response = await axios.get(
+        `http://localhost:8080/cart/delivered/${id}`
+      );
+      console.log(response);
+      if (response) {
         setLoading(false);
-        console.log(error);
+        setDeliveredOrders(response.data.orders);
       }
-    };
-    if (auth?.user?._id) fetchMyOrders();
-  }, []);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (auth?.user) fetchDeliveredOrders();
+  }, [auth]);
 
   if (loading) {
-    return (
-      <h1 className="text-center p-5 text-2xl font-bold">...Loading...</h1>
-    );
+    return <p className="text-center text-xl font-medium p-5 ">Loading...</p>;
   }
-
-  if (!myOrders) {
+  if (!deliveredOrders) {
     return (
       <div className="flex items-center flex-col gap-5 mt-5">
-        <h3 className="text-xl">No order placed.</h3>
+        <h3 className="text-xl">No order delivered history.</h3>
         <Link to="/" className="px-4 py-2 bg-blue-700 text-white rounded-md">
           Order now
         </Link>
@@ -47,11 +48,11 @@ const TrackOrder = () => {
   return (
     <div>
       <h1 className="text-center text-base md:text-lg font-medium p-5">
-        Track your order
+        Order History
       </h1>
       {/* Showing the orders */}
       <div className="gap-5 flex flex-col rounded-sm">
-        {myOrders?.map((item, index) => {
+        {deliveredOrders?.map((item, index) => {
           return (
             <div
               className="bg-gray-200 px-10 py-2 flex flex-col gap-[20px]   md:flex-row md:text-sm md:justify-between md:py-9"
@@ -70,7 +71,6 @@ const TrackOrder = () => {
                   </p>
                 ))}
               </div>
-              {/* <p className="font-medium p-3">Status:</p> */}
               <p
                 className={
                   item?.status === "Processing"
@@ -107,4 +107,4 @@ const TrackOrder = () => {
   );
 };
 
-export default TrackOrder;
+export default OrderHistory;

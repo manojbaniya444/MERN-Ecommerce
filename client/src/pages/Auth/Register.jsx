@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import { useAppContext } from "../../context/globalContext";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Register = () => {
   const [registerFormData, setRegisterFormData] = useState({
@@ -11,8 +11,9 @@ const Register = () => {
     password: "",
     answer: "",
   });
+  const [delay, setDelay] = useState(false);
+  const [error, setError] = useState("");
 
-  // const { setNotificaton } = useAppContext();
   const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
@@ -28,11 +29,16 @@ const Register = () => {
         "http://localhost:8080/users/register",
         registerFormData
       );
-      console.log(response.data.message);
-      setRegisterFormData({ name: "", email: "", password: "", answer: "" });
-      // setNotificaton({ show: true, message: "Account created successfully" });
-      navigate("/login");
+
+      setTimeout(() => {
+        setDelay(false);
+        setRegisterFormData({ name: "", email: "", password: "", answer: "" });
+
+        navigate("/login");
+      }, 700);
     } catch (error) {
+      setDelay(false);
+      setError(error.response?.data.message);
       console.log("Error register user", error);
     }
   };
@@ -47,11 +53,13 @@ const Register = () => {
           onSubmit={registerHandler}
           className="bg-zinc-900 text-white flex flex-col gap-5 p-5 rounded-md w-3/4 max-w-[500px]"
         >
+          {error && <p>{error}</p>}
           <div className="flex flex-col gap-2">
             <label>Name</label>
             <input
               className="p-3 rounded-sm text-black"
               type="text"
+              autoComplete="off"
               placeholder="Enter username"
               required
               onChange={onChangeHandler}
@@ -63,7 +71,8 @@ const Register = () => {
             <input
               className="p-3 rounded-sm text-black"
               type="email"
-              placeholder="Enter username"
+              placeholder="anything@gmail.com"
+              autoComplete="off"
               required
               onChange={onChangeHandler}
               name="email"
@@ -73,8 +82,9 @@ const Register = () => {
             <label>Password</label>
             <input
               className="p-3 rounded-sm text-black"
-              type="text"
-              placeholder="Enter username"
+              type="password"
+              autoComplete="off"
+              placeholder="Enter password"
               required
               onChange={onChangeHandler}
               name="password"
@@ -85,7 +95,8 @@ const Register = () => {
             <input
               className="p-3 rounded-sm text-black"
               type="text"
-              placeholder="Enter username"
+              autoComplete="off"
+              placeholder="Security answer (any)"
               required
               onChange={onChangeHandler}
               name="answer"
@@ -96,7 +107,18 @@ const Register = () => {
               type="submit"
               className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
             >
-              Register
+              {delay ? (
+                <ClipLoader
+                  color="#ffffff"
+                  loading={delay}
+                  // cssOverride={override}
+                  size={15}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "Register"
+              )}
             </button>
 
             <Link to="/login" className="text-blue-400">

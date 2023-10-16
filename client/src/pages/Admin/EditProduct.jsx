@@ -148,6 +148,10 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
           />
 
           <select name="category" onChange={(e) => setCategory(e.target.value)}>
+            <option disabled={category !== ""} value="">
+              Choose category
+            </option>
+            ;
             {categories?.map((item, index) => {
               return (
                 <option value={item._id} key={index}>

@@ -21,6 +21,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./pages/user/Cart";
 import TrackOrder from "./pages/user/TrackOrder";
 import Orders from "./pages/Admin/Orders";
+import OrderHistory from "./pages/user/OrderHistory";
 
 const App = () => {
   const { notification } = useAppContext();
@@ -44,6 +45,7 @@ const App = () => {
         >
           <Route path="profile" element={<UserDashboard />} />
           <Route path="my-orders" element={<TrackOrder />} />
+          <Route path="order-history" element={<OrderHistory />} />
         </Route>
 
         <Route

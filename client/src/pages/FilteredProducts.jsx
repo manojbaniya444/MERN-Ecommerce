@@ -23,7 +23,7 @@ const FilteredProducts = ({ products }) => {
   };
 
   return (
-    <div className="flex-1 p-2 mt-[199px] md:mt-[120px]">
+    <div className="flex-1 p-2 mt-[20px]">
       <h1 className="text-center text-sm md:text-xl lg:text-2xl font-medium">
         Filtered products
       </h1>
