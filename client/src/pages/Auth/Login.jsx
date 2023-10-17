@@ -65,18 +65,18 @@ const Login = () => {
           {errorMessage}
         </p>
       )}
-      <div className="flex items-center justify-center mt-2">
+      <div className="flex items-center justify-center mt-2 text-sm md:text-base">
         <form
           onSubmit={loginHandler}
           className="bg-zinc-900 text-white flex flex-col gap-5 p-5 rounded-md w-3/4 max-w-[500px]"
         >
           <div className="flex flex-col gap-2">
-            <label>Email</label>
+            <label>Username</label>
             <input
               className="p-3 rounded-sm text-black"
-              type="email"
+              type="text"
               autoComplete="off"
-              placeholder="Enter email"
+              placeholder="Your registered username"
               required
               onChange={(e) => setEmail(e.target.value)}
               name="email"
@@ -96,7 +96,7 @@ const Login = () => {
               value={password}
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-col md:flex-row gap-2">
             <button
               type="submit"
               className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
@@ -115,7 +115,7 @@ const Login = () => {
               )}
             </button>
 
-            <Link to="/register" className="text-blue-400">
+            <Link to="/register" className="text-blue-400 text-sm md:text-base">
               Don't have an account? Register
             </Link>
           </div>

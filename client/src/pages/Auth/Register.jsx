@@ -48,7 +48,7 @@ const Register = () => {
         M-Store
       </Link>
       <h2 className="text-center mt-5 text-2xl">Register</h2>
-      <div className="flex items-center justify-center mt-2">
+      <div className="flex items-center justify-center mt-2 text-sm md:text-base">
         <form
           onSubmit={registerHandler}
           className="bg-zinc-900 text-white flex flex-col gap-5 p-5 rounded-md w-3/4 max-w-[500px]"
@@ -60,18 +60,18 @@ const Register = () => {
               className="p-3 rounded-sm text-black"
               type="text"
               autoComplete="off"
-              placeholder="Enter username"
+              placeholder="Enter your full name"
               required
               onChange={onChangeHandler}
               name="name"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label>Email</label>
+            <label>Username</label>
             <input
               className="p-3 rounded-sm text-black"
-              type="email"
-              placeholder="anything@gmail.com"
+              type="text"
+              placeholder="Unique username"
               autoComplete="off"
               required
               onChange={onChangeHandler}
@@ -102,7 +102,7 @@ const Register = () => {
               name="answer"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-col md:flex-row gap-2">
             <button
               type="submit"
               className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"

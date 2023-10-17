@@ -3,15 +3,15 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex items-center w-full display">
-      <div className="self-start sticky top-0 bg-blue-700 py-5 px-4 h-[100vh] hidden sm:block">
-        <NavLink to="/" className="font-medium text-3xl text-white">
+    <div className="flex flex-col md:flex-row items-center w-full display text-sm md:text-normal">
+      <div className="w-full flex  items-center flex-col md:max-w-[15%] md:self-start sticky top-0 bg-blue-700 py-5 px-4 md:h-[100vh]  z-10">
+        <NavLink to="/" className="font-medium text-3xl  text-white ">
           Home
         </NavLink>
         <div className="">
-          <ul className="mt-5 flex flex-col gap-5 text-white">
+          <ul className="mt-5 flex md:flex-col gap-5 text-white justify-center items-center">
             <li>
-              <NavLink to="/admin" className="font-bold text-gray-400">
+              <NavLink to="/admin" className="font-bold text-white">
                 Manage Products
               </NavLink>
             </li>

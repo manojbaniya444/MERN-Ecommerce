@@ -47,11 +47,12 @@ const OrderHistory = () => {
   }
   return (
     <div>
-      <h1 className="text-center text-base md:text-lg font-medium p-5">
+      <h1 className="text-center text-base md:text-lg font-medium mt-2">
         Order History
       </h1>
+      <p className="text-center font-extralight text-sm">Delivered Items</p>
       {/* Showing the orders */}
-      <div className="gap-5 flex flex-col rounded-sm">
+      <div className="gap-5 flex flex-col rounded-sm text-sm md:text-base mb-10">
         {deliveredOrders?.map((item, index) => {
           return (
             <div

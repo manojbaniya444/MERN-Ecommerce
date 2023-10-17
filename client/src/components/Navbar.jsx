@@ -5,13 +5,18 @@ import LogoutModal from "./LogoutModal";
 import { useAppContext } from "../context/globalContext";
 import { useCartContext } from "../context/cartContext";
 import { useLocation } from "react-router-dom";
+import MobileNavbar from "./MobileNavbar";
+
+import { AiOutlineMenu } from "react-icons/ai";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
   const { auth, setAuth } = useAuthContext();
 
   const { search, setSearch } = useAppContext();
   const { cartItems } = useCartContext();
+
   const location = useLocation();
 
   const logoutHandler = () => {
@@ -23,32 +28,47 @@ const Navbar = () => {
       {showModal && (
         <LogoutModal showModal={showModal} setShowModal={setShowModal} />
       )}
+      {/* Mobile Nav Component */}
+      {showMobileNav && (
+        <MobileNavbar
+          setShowModal={setShowModal}
+          setShowMobileNav={setShowMobileNav}
+          showModal={showModal}
+        />
+      )}
 
-      <div className="bg-blue-900 text-white px-2 md:px-10 py-3 font-light text-sm md:text-md md:font-medium flex items-center justify-between sticky top-0 w-full z-10">
+      <div className="bg-blue-900 text-white px-2 md:px-10 py-3 font-light text-sm md:text-md md:font-medium flex items-center justify-between sticky top-0 w-full z-10 gap-5 md:gap-0">
         {/* Base */}
         <div onClick={() => setSearch("")}>
           <NavLink to="/">
             <p className="text-base md:text-lg font-black">M-Store</p>
           </NavLink>
         </div>
-
         {/* Search */}
         {location.pathname.includes("/single-product") ? null : (
-          <div className="flex-1 flex justify-center items-center">
+          <div className=" flex-1 md:flex justify-center items-center">
             <input
               type="text"
               placeholder="Search products..."
               name="search"
               onChange={(e) => setSearch(e.target.value)}
               value={search}
-              className="p-2 w-3/4 rounded-lg text-black font-medium outline-none"
+              className="p-2 md:w-3/4 w-full rounded-lg text-black font-medium outline-none"
             />
           </div>
         )}
 
+        {/* Menu icon */}
+        <div className="block md:hidden">
+          <AiOutlineMenu
+            className="text-3xl cursor-pointer"
+            onClick={() => setShowMobileNav(true)}
+          />
+        </div>
+
         {/* Nav */}
 
-        <div className="">
+        <div className="hidden md:block">
           {auth ? (
             <ul className="flex flex-row items-center gap-[40px]">
               <li className="cursor-pointer" onClick={logoutHandler}>
@@ -69,14 +89,16 @@ const Navbar = () => {
                   {auth?.user?.role === 1 ? "Admin" : `${auth?.user?.name}`}
                 </Link>
               </li>
-              <li className="relative">
-                <NavLink className="p-2 bg-blue-700 rounded-2xl" to="/cart">
-                  Cart
-                </NavLink>
-                <p className="absolute -top-4 bg-blue-400 text-black font-thin px-2 rounded-[50%] -right-3 text-lg">
-                  {cartItems?.length}
-                </p>
-              </li>
+              {auth?.user?.role !== 1 && (
+                <li className="relative">
+                  <NavLink className="p-2 bg-blue-700 rounded-2xl" to="/cart">
+                    Cart
+                  </NavLink>
+                  <p className="absolute -top-4 bg-blue-400 text-black font-thin px-2 rounded-[50%] -right-3 text-lg">
+                    {cartItems?.length}
+                  </p>
+                </li>
+              )}
             </ul>
           ) : (
             <>

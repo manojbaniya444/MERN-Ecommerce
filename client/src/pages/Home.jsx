@@ -120,9 +120,9 @@ const Home = () => {
 
       <div className="flex flex-col ">
         {/* Filter */}
-        <div className="bg-gray-100 text-black p-2 fixed flex w-full z-10 flex-col md:flex-row justify-between">
+        <div className="text-sm md:text-base bg-gray-100 text-black p-2 fixed flex w-full z-10 flex-col md:flex-row justify-between">
           {/* Category Filter */}
-          <div className="flex gap-5 flex-wrap justify-center items-center p-2 md:max-w-1/2">
+          <div className="flex gap-2 md:gap-5 flex-wrap justify-center items-center p-2 md:max-w-1/2">
             {categories?.map((item) => {
               return (
                 <button
@@ -143,7 +143,7 @@ const Home = () => {
           <div className="flex item-center justify-center gap-2">
             <input
               type="number"
-              placeholder="minimum price"
+              placeholder="min"
               className=" w-[20%] md:w-[30%] outline-none p-2  rounded-md self-center"
               value={priceQuery.min}
               onChange={(e) =>
@@ -152,7 +152,7 @@ const Home = () => {
             />
             <input
               type="number"
-              placeholder="maximum price"
+              placeholder="max"
               className="w-[20%] md:w-[30%] outline-none p-2 rounded-md self-center"
               value={priceQuery.max}
               onChange={(e) =>
@@ -173,11 +173,11 @@ const Home = () => {
             </button>
           </div>
         </div>
-        <div className="w-full mt-[70px] h-[300px]">
+        <div className="w-full mt-[70px] h-[250px] md:h-[300px]">
           <img
             src="/banner12.jpeg"
             alt="banner-image"
-            className="w-full object-cover h-full"
+            className="w-full h-full"
           />
         </div>
         {filteredProducts?.length > 0 ? (

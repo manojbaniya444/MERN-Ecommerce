@@ -57,7 +57,7 @@ const Cart = () => {
               return (
                 <div
                   key={index}
-                  className="flex items-center gap-5 bg-gray-100 justify-start p-5"
+                  className="flex items-center gap-5 bg-gray-100 justify-center p-5"
                 >
                   <div className="w-[100px]">
                     <img
@@ -66,20 +66,20 @@ const Cart = () => {
                       className="object-cover w-full"
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col gap-2">
                     <p>{item?.name}</p>
                     <p className="text-gray-600 font-medium">
                       {item?.category?.name}
                     </p>
-                    <div className="flex gap-10 items-center">
-                      <p className="mt-2">Rs.{item?.price}</p>
-                      <button
-                        className="px-3 py-1 bg-red-700 text-white rounded-sm cursor-pointer"
-                        onClick={() => removeCartHandler(item?._id, item?.name)}
-                      >
-                        Remove from cart
-                      </button>
+                    <div className="flex items-center">
+                      <p className="">Rs.{item?.price}</p>
                     </div>
+                    <button
+                      className="p-1 md:px-3 md:py-1 bg-red-700 text-white rounded-sm cursor-pointer text-sm font-extralight md:text-base"
+                      onClick={() => removeCartHandler(item?._id, item?.name)}
+                    >
+                      Remove from cart
+                    </button>
                   </div>
                 </div>
               );

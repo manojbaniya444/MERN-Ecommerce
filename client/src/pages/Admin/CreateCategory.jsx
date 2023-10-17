@@ -98,7 +98,7 @@ const CreateCategory = () => {
         {edit?.show && (
           <form
             onSubmit={editCategoryHandler}
-            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-2xl w-[90%] max-w-[1000px] mt-10"
+            className="flex gap-3 items-center justify-betweem ml-[50%] -translate-x-1/2  text-sm md:text-base w-[90%] max-w-[1000px] mt-10 flex-col"
           >
             <label htmlFor="category-name">New category name:</label>
             <input
@@ -109,7 +109,7 @@ const CreateCategory = () => {
               onChange={(e) => {
                 setEdit({ ...edit, name: e.target.value });
               }}
-              className="flex-1 p-2 outline-none rounded-sm bg-gray-200 "
+              className="flex-1 p-2 outline-none rounded-lg bg-gray-200 w-[90%]"
             />
             <button
               type="submit"
@@ -134,11 +134,11 @@ const CreateCategory = () => {
               placeholder="Category name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="flex-1 p-2 outline-none rounded-md  bg-gray-100 "
+              className="flex-1 p-1 outline-none rounded-md w-[90%] bg-gray-100 "
             />
             <button
               type="submit"
-              className="border border-solid rounded-lg px-4 py-2 bg-blue-400 text-white cursor-pointer"
+              className="border border-solid rounded-lg px-2 py-1 md:px-4 md:py-2 bg-blue-400 text-white cursor-pointer"
             >
               Create
             </button>

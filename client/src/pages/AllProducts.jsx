@@ -79,7 +79,7 @@ const AllProducts = () => {
           return (
             <article
               key={item?._id}
-              className="w-[80%] sm:w-[25%]  max-w-[200px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
+              className="w-[40%] sm:w-[25%]  max-w-[200px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
             >
               <Link to={`single-product/${item?._id}`}>
                 <div className="p-3 rounded-md w-[100%] self-center">
@@ -91,7 +91,7 @@ const AllProducts = () => {
                 </div>
 
                 <div className="p-3">
-                  <div className="font-bold text-sm mb-2 w-[300px] h-[50px] self-start">
+                  <div className="font-normal md:font-bold text-sm mb-2 w-[300px] h-[50px] self-start">
                     {item?.name}
                   </div>
                   <p className="text-gray-700 text-base self-start">
@@ -102,7 +102,7 @@ const AllProducts = () => {
               <div className="p-3">
                 <button
                   onClick={() => addCartHandler(item)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded-lg self-start"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-normal text-sm md:text-base py-2 px-4 rounded-lg self-start"
                 >
                   Add to Cart
                 </button>

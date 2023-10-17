@@ -73,7 +73,7 @@ const AdminIndex = () => {
         <h3>Manage Products</h3>
         <p className="font-light self-end">Admin: {auth?.user?.name}</p>
       </div> */}
-      <div className="  bg-gray-500 text-white">
+      <div className="  bg-gray-500 text-white overflow-x-scroll text-sm md:text-normal">
         <table className="w-full border-collapse border border-gray-300 bg-white text-black text-center">
           <thead className="bg-gray-200 text-black">
             <tr>
@@ -104,7 +104,7 @@ const AdminIndex = () => {
                   <td className="p-2 border-b border-gray-300 text-start">
                     Rs.{item?.price}
                   </td>
-                  <td className="p-2 border-b border-gray-300 text-start text-sm w-[200px]">
+                  <td className="p-2 border-b border-gray-300 text-start font-extralight text-sm w-[200px]">
                     {item?.name}
                   </td>
                   <td className={" border-b border-gray-300 "}>

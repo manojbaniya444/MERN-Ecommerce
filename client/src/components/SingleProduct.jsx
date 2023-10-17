@@ -75,14 +75,14 @@ const SingleProduct = () => {
           <img
             src={`http://localhost:8080/products/product-photo/${productId}`}
             alt="aads"
-            className="w-[300px] md:w-[350px] ml-[50%] -translate-x-1/2 p-2 rounded-md"
+            className="w-[250px] md:w-[350px] ml-[50%] -translate-x-1/2 p-2 rounded-md"
           />
         </div>
         {/* Details */}
         <div className=" bg-gray-100 p-5 rounded-md flex-1">
           <h3 className="font-semibold">{product?.name}</h3>
           <h3 className="pt-2 font-bold">Rs.{product?.price}</h3>
-          <h3 className="py-3 font-light text-md">{product?.description}</h3>
+          <h3 className="py-3 font-thin md:font-normal text-sm md:text-md">{product?.description}</h3>
           <h3
             className={
               product?.stock

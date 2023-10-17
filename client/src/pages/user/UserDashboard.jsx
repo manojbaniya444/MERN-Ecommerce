@@ -6,7 +6,7 @@ const UserDashboard = () => {
 
   return (
     <div className="flex flex-col items-center justify-center p-5">
-      <div className="flex gap-5 text-2xl">
+      <div className="flex gap-5 text-md">
         <p>Name: {auth?.user.name}</p>
         <p>Email: {auth?.user.email}</p>
       </div>

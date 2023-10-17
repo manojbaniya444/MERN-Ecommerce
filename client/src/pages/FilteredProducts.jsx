@@ -23,7 +23,7 @@ const FilteredProducts = ({ products }) => {
   };
 
   return (
-    <div className="flex-1 p-2 mt-[20px]">
+    <div className="flex-1  mt-[20px]">
       <h1 className="text-center text-sm md:text-xl lg:text-2xl font-medium">
         Filtered products
       </h1>
@@ -32,7 +32,7 @@ const FilteredProducts = ({ products }) => {
           return (
             <article
               key={item?._id}
-              className="w-[80%] sm:w-[25%]  max-w-[200px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
+              className="w-[43%] sm:w-[25%]  max-w-[200px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
             >
               <Link to={`single-product/${item?._id}`}>
                 <div className="p-3 rounded-md w-[100%] self-center">
