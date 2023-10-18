@@ -82,7 +82,9 @@ const SingleProduct = () => {
         <div className=" bg-gray-100 p-5 rounded-md flex-1">
           <h3 className="font-semibold">{product?.name}</h3>
           <h3 className="pt-2 font-bold">Rs.{product?.price}</h3>
-          <h3 className="py-3 font-thin md:font-normal text-sm md:text-md">{product?.description}</h3>
+          <h3 className="py-3 font-thin md:font-normal text-sm md:text-md">
+            {product?.description}
+          </h3>
           <h3
             className={
               product?.stock
@@ -116,7 +118,9 @@ const SingleProduct = () => {
               key={item?._id}
               className="w-[80%] sm:w-[45%]  max-w-[250px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
               onClick={() => {
-                navigate(`/single-product/${item?._id}`);
+                navigate(
+                  `/single-product/${item?._id}`
+                );
               }}
             >
               <div className="p-3 rounded-md w-[100%] self-center">
