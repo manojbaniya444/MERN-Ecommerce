@@ -17,7 +17,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
   const fetchAllCategory = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/category/all-category"
+        "https://mern-ecommerce-sand.vercel.app/category/all-category"
       );
       if (response) {
         setCategories(response.data.allCategory);
@@ -30,7 +30,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
   const fetchSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/products/single-product/${editProduct.id}`
+        `https://mern-ecommerce-sand.vercel.app/products/single-product/${editProduct.id}`
       );
 
       if (data) {
@@ -66,7 +66,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:8080/products/update-product/${editProduct.id}`,
+        `https://mern-ecommerce-sand.vercel.app/products/update-product/${editProduct.id}`,
         updatedFormData
       );
 

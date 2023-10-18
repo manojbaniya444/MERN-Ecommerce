@@ -11,7 +11,7 @@ const Register = () => {
     password: "",
     answer: "",
   });
-  const [delay, setDelay] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -25,19 +25,19 @@ const Register = () => {
   const registerHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post(
-        "http://localhost:8080/users/register",
+        "https://mern-ecommerce-sand.vercel.app/users/register",
         registerFormData
       );
 
-      setTimeout(() => {
-        setDelay(false);
+      if (response) {
+        setLoading(false);
         setRegisterFormData({ name: "", email: "", password: "", answer: "" });
-
         navigate("/login");
-      }, 700);
+      }
     } catch (error) {
-      setDelay(false);
+      setLoading(false);
       setError(error.response?.data.message);
       console.log("Error register user", error);
     }
@@ -107,10 +107,10 @@ const Register = () => {
               type="submit"
               className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
             >
-              {delay ? (
+              {loading ? (
                 <ClipLoader
                   color="#ffffff"
-                  loading={delay}
+                  loading={loading}
                   // cssOverride={override}
                   size={15}
                   aria-label="Loading Spinner"

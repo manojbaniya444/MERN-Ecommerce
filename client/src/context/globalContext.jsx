@@ -22,7 +22,7 @@ export const AppProvider = ({ children }) => {
   //* Fetch search products
   const fetchSearchProducts = async () => {
     const res = await axios.post(
-      "http://localhost:8080/products/search-products",
+      "https://mern-ecommerce-sand.vercel.app/products/search-products",
       { search }
     );
     setSearchProducts(res?.data.products);

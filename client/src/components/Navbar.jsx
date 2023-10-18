@@ -50,6 +50,7 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search products..."
+              autoComplete="off"
               name="search"
               onChange={(e) => setSearch(e.target.value)}
               value={search}

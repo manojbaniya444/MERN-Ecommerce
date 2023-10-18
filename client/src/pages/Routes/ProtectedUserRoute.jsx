@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/authContext";
 import Loader from "../../components/Loader";
+import HashLoader from "react-spinners/HashLoader";
 
 const ProtectedUserRoute = ({ children }) => {
   const [userVerified, setUserVerified] = useState(false);
@@ -11,7 +12,7 @@ const ProtectedUserRoute = ({ children }) => {
     const checkAuth = async () => {
       setAuthLoading(true);
       const response = await axios.get(
-        "http://localhost:8080/users/check-user-auth",
+        "https://mern-ecommerce-sand.vercel.app/users/check-user-auth",
         {
           headers: {
             authorization: auth?.token,
@@ -20,8 +21,8 @@ const ProtectedUserRoute = ({ children }) => {
       );
 
       if (response?.data?.success) {
-        setAuthLoading(false);
         setUserVerified(true);
+        setAuthLoading(false);
       }
     };
 
@@ -30,8 +31,15 @@ const ProtectedUserRoute = ({ children }) => {
 
   if (authLoading) {
     return (
-      <div>
-        <h1 className="text-center font-bold text-xl p-9">Loading auth...</h1>
+      <div className="flex justify-center mt-10">
+        <HashLoader
+          color="#2574d4"
+          loading={true}
+          // cssOverride={override}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
       </div>
     );
   }

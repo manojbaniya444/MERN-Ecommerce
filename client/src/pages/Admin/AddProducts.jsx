@@ -24,7 +24,7 @@ const AddProducts = () => {
     try {
       const fetchAllCategory = async () => {
         const response = await axios.get(
-          "http://localhost:8080/category/all-category"
+          "https://mern-ecommerce-sand.vercel.app/category/all-category"
         );
         setCategories(response?.data?.allCategory);
       };
@@ -81,7 +81,7 @@ const AddProducts = () => {
       productData.append("category", productFormData.category);
       console.log(productData);
       const response = await axios.post(
-        "http://localhost:8080/products/add-product",
+        "https://mern-ecommerce-sand.vercel.app/products/add-product",
         productData
       );
       setNotification({ show: true, message: "New product created" });

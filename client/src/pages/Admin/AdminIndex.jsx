@@ -3,6 +3,8 @@ import { useAuthContext } from "../../context/authContext";
 import axios from "axios";
 import { useAppContext } from "../../context/globalContext";
 import EditProduct from "./EditProduct";
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 const AdminIndex = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +14,7 @@ const AdminIndex = () => {
     show: false,
   });
 
-  const { auth } = useAuthContext();
+  const { auth,authLoading } = useAuthContext();
 
   const { setNotification } = useAppContext();
 
@@ -20,7 +22,7 @@ const AdminIndex = () => {
   const fetchAllProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/products/all-products"
+        "https://mern-ecommerce-sand.vercel.app/products/all-products"
       );
       setProducts(response?.data?.products);
       // console.log(response?.data?.products);
@@ -41,7 +43,7 @@ const AdminIndex = () => {
     if (answer === "yes") {
       try {
         const response = await axios.delete(
-          `http://localhost:8080/products/delete-product/${id}`
+          `https://mern-ecommerce-sand.vercel.app/products/delete-product/${id}`
         );
         setChange(!change);
         setNotification({
@@ -66,6 +68,8 @@ const AdminIndex = () => {
       />
     );
   }
+
+  if(authLoading) return <div>...</div>
 
   return (
     <div className="">
@@ -96,7 +100,7 @@ const AdminIndex = () => {
                 <tr key={item?._id} className="hover:bg-gray-100 text-sm">
                   <td className="p-2 border-b border-gray-300">
                     <img
-                      src={`http://localhost:8080/products/product-photo/${item?._id}`}
+                      src={`https://mern-ecommerce-sand.vercel.app/products/product-photo/${item?._id}`}
                       alt={item?.name}
                       className="h-16 w-16 object-cover"
                     />

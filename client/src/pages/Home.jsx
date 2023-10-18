@@ -20,7 +20,7 @@ const Home = () => {
   const fetchAllCategory = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/category/all-category"
+        "https://mern-ecommerce-sand.vercel.app/category/all-category"
       );
       if (response) {
         setCategories(response.data.allCategory);
@@ -93,7 +93,7 @@ const Home = () => {
     console.log(filter);
     try {
       const response = await axios.post(
-        "http://localhost:8080/products/filter-products",
+        "https://mern-ecommerce-sand.vercel.app/products/filter-products",
         filter
       );
       setFilteredProducts(response?.data.products);

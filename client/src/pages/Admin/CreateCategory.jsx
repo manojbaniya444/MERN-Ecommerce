@@ -21,7 +21,7 @@ const CreateCategory = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/category/create-category",
+        "https://mern-ecommerce-sand.vercel.app/category/create-category",
         { name }
       );
       console.log("Created category", response);
@@ -41,7 +41,7 @@ const CreateCategory = () => {
     try {
       const fetchAllCategory = async () => {
         const response = await axios.get(
-          "http://localhost:8080/category/all-category"
+          "https://mern-ecommerce-sand.vercel.app/category/all-category"
         );
         if (response?.data?.success) {
           setAllCategory(response?.data?.allCategory);
@@ -63,7 +63,7 @@ const CreateCategory = () => {
     if (answer === "yes") {
       try {
         const response = await axios.delete(
-          `http://localhost:8080/category/delete-category/${id}`
+          `https://mern-ecommerce-sand.vercel.app/category/delete-category/${id}`
         );
         setChange(!change);
       } catch (error) {
@@ -77,7 +77,7 @@ const CreateCategory = () => {
     event.preventDefault();
     try {
       const response = await axios.patch(
-        `http://localhost:8080/category/update-category/${edit.id}`,
+        `https://mern-ecommerce-sand.vercel.app/category/update-category/${edit.id}`,
         {
           updatedName: edit.name,
         }

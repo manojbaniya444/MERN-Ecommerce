@@ -17,7 +17,7 @@ const Orders = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:8080/cart/all-orders"
+          "https://mern-ecommerce-sand.vercel.app/cart/all-orders"
         );
         if (response) {
           setAllOrders(response.data.orders);
@@ -37,7 +37,7 @@ const Orders = () => {
   const statusChangeHandler = async (id, value) => {
     try {
       const response = await axios.patch(
-        `http://localhost:8080/cart/status-change/${id}`,
+        `https://mern-ecommerce-sand.vercel.app/cart/status-change/${id}`,
         {
           status: value,
         }

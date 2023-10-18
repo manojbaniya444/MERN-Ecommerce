@@ -5,10 +5,13 @@ import Navbar from "./Navbar";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
 import { useCartContext } from "../context/cartContext";
+import PropagateLoader from "react-spinners/PropagateLoader";
+import BarLoader from "react-spinners/BarLoader";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState();
   const [similarProducts, setSimilarProducts] = useState();
+  const [loading, setLoading] = useState(false);
 
   const { productId } = useParams();
   const { categoryId } = useParams();
@@ -22,14 +25,17 @@ const SingleProduct = () => {
 
   const fetchSingleProduct = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
-        `http://localhost:8080/products/single-product/${productId}`
+        `https://mern-ecommerce-sand.vercel.app/products/single-product/${productId}`
       );
       if (response) {
+        setLoading(false);
         setProduct(response?.data.product);
         fetchSimilarProducts(productId, response?.data.product.category);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -39,7 +45,7 @@ const SingleProduct = () => {
   const fetchSimilarProducts = async (pid, cid) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/products/similar-products/${pid}/${cid}`
+        `https://mern-ecommerce-sand.vercel.app/products/similar-products/${pid}/${cid}`
       );
       setSimilarProducts(response?.data.products);
     } catch (error) {
@@ -66,6 +72,24 @@ const SingleProduct = () => {
     addCartHandler(product);
   };
 
+  if (loading) {
+    return (
+      <div>
+        <Navbar />
+        <div className="flex flex-col items-center justify-center gap-5">
+          <h1 className="mt-10 text-center text-2xl font-medium">Loading</h1>
+          <BarLoader
+            color="#2c5dbe"
+            loading={true}
+            size={22}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
@@ -73,11 +97,12 @@ const SingleProduct = () => {
       <div className="p-9 md:p-3 gap-2 flex flex-col md:flex-row bg-gray-200">
         <div className="bg-gray-100 rounded-md">
           <img
-            src={`http://localhost:8080/products/product-photo/${productId}`}
+            src={`https://mern-ecommerce-sand.vercel.app/products/product-photo/${productId}`}
             alt="aads"
             className="w-[250px] md:w-[350px] ml-[50%] -translate-x-1/2 p-2 rounded-md"
           />
         </div>
+        {/* Loading animation */}
         {/* Details */}
         <div className=" bg-gray-100 p-5 rounded-md flex-1">
           <h3 className="font-semibold">{product?.name}</h3>
@@ -118,14 +143,12 @@ const SingleProduct = () => {
               key={item?._id}
               className="w-[80%] sm:w-[45%]  max-w-[250px] rounded-md overflow-hidden flex flex-col bg-white hover:bg-gray-100 cursor-pointer p-1"
               onClick={() => {
-                navigate(
-                  `/single-product/${item?._id}`
-                );
+                navigate(`/single-product/${item?._id}`);
               }}
             >
               <div className="p-3 rounded-md w-[100%] self-center">
                 <img
-                  src={`http://localhost:8080/products/product-photo/${item?._id}/`}
+                  src={`https://mern-ecommerce-sand.vercel.app/products/product-photo/${item?._id}/`}
                   alt="Product"
                   className="w-full h-[200px] object-cover rounded-md"
                 />

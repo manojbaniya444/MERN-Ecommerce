@@ -9,7 +9,7 @@ import { useAppContext } from "../../context/globalContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [delay, setDelay] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const { setAuth, auth } = useAuthContext();
@@ -20,11 +20,14 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      setDelay(true);
-      const response = await axios.post("http://localhost:8080/users/login", {
-        email,
-        password,
-      });
+      setLoading(true);
+      const response = await axios.post(
+        "https://mern-ecommerce-sand.vercel.app/users/login",
+        {
+          email,
+          password,
+        }
+      );
       // console.log(response?.data);
       setAuth({
         name: response?.data?.name,
@@ -34,7 +37,7 @@ const Login = () => {
       localStorage.setItem("auth", JSON.stringify(response?.data));
 
       setTimeout(() => {
-        setDelay(false);
+        setLoading(false);
         setEmail("");
         setPassword("");
         setErrorMessage(null);
@@ -48,7 +51,7 @@ const Login = () => {
       }, 700);
     } catch (error) {
       setTimeout(() => {
-        setDelay(false);
+        setLoading(false);
         setErrorMessage(error?.response?.data.message);
       }, 700);
       console.log(error);
@@ -101,10 +104,10 @@ const Login = () => {
               type="submit"
               className="bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
             >
-              {delay ? (
+              {loading ? (
                 <ClipLoader
                   color="#ffffff"
-                  loading={delay}
+                  loading={loading}
                   // cssOverride={override}
                   size={15}
                   aria-label="Loading Spinner"

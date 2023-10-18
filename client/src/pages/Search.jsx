@@ -52,7 +52,7 @@ const Search = ({ products }) => {
               <Link to={`single-product/${item?._id}`}>
                 <div className="p-3 rounded-md w-[100%] self-center">
                   <img
-                    src={`http://localhost:8080/products/product-photo/${item?._id}`}
+                    src={`https://mern-ecommerce-sand.vercel.app/products/product-photo/${item?._id}`}
                     alt="Product"
                     className="w-full h-[150px] object-cover rounded-md"
                   />
