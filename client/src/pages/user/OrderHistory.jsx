@@ -15,7 +15,7 @@ const OrderHistory = () => {
       setLoading(true);
       const id = auth?.user._id;
       const response = await axios.get(
-        `http://localhost:8080/cart/delivered/${id}`
+        `https://mern-ecommerce-sand.vercel.app/cart/delivered/${id}`
       );
       console.log(response);
       if (response) {

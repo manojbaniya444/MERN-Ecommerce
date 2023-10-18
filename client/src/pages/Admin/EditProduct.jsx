@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppContext } from "../../context/globalContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
   const [categories, setCategories] = useState();
@@ -12,6 +13,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(true);
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const { setNotification } = useAppContext();
 
   const fetchAllCategory = async () => {
@@ -65,6 +67,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
     updatedFormData.append("category", category);
 
     try {
+      setLoading(true);
       const response = await axios.patch(
         `https://mern-ecommerce-sand.vercel.app/products/update-product/${editProduct.id}`,
         updatedFormData
@@ -78,6 +81,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
         setQuantity("");
         setStock(true);
         setCategory("");
+        setLoading(false);
         setNotification({
           show: true,
           message: "Product updated successfully.",
@@ -86,6 +90,7 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
         setChange(!change);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
       setError(error.response.data.message);
     }
@@ -174,7 +179,18 @@ const EditProduct = ({ editProduct, setEditProduct, change, setChange }) => {
             type="submit"
             className="p-3 bg-blue-700 text-white rounded-md cursor-pointer "
           >
-            Update product
+            {loading ? (
+              <ClipLoader
+                color="#ffffff"
+                loading={loading}
+                // cssOverride={override}
+                size={15}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Update Product"
+            )}
           </button>
           <button
             onClick={() => setEditProduct({ ...editProduct, show: false })}

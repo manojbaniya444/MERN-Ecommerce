@@ -5,13 +5,14 @@ import Navbar from "./Navbar";
 import { useAuthContext } from "../context/authContext";
 import { useAppContext } from "../context/globalContext";
 import { useCartContext } from "../context/cartContext";
-import PropagateLoader from "react-spinners/PropagateLoader";
 import BarLoader from "react-spinners/BarLoader";
+import PuffLoader from "react-spinners/PuffLoader";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState();
   const [similarProducts, setSimilarProducts] = useState();
   const [loading, setLoading] = useState(false);
+  const [similarLoading, setSimilarLoading] = useState(false);
 
   const { productId } = useParams();
   const { categoryId } = useParams();
@@ -44,11 +45,14 @@ const SingleProduct = () => {
 
   const fetchSimilarProducts = async (pid, cid) => {
     try {
+      setSimilarLoading(true);
       const response = await axios.get(
         `https://mern-ecommerce-sand.vercel.app/products/similar-products/${pid}/${cid}`
       );
+      setSimilarLoading(false);
       setSimilarProducts(response?.data.products);
     } catch (error) {
+      setSimilarLoading(false);
       console.log(error);
     }
   };
@@ -78,7 +82,7 @@ const SingleProduct = () => {
         <Navbar />
         <div className="flex flex-col items-center justify-center gap-5">
           <h1 className="mt-10 text-center text-2xl font-medium">Loading</h1>
-          <BarLoader
+          <PuffLoader
             color="#2c5dbe"
             loading={true}
             size={22}
@@ -136,6 +140,17 @@ const SingleProduct = () => {
       <h1 className="capitalize text-center text-sm md:text-lg font-semibold p-5">
         Products you may like
       </h1>
+      {similarLoading && (
+        <div className="flex items-center justify-center mt-5">
+          <BarLoader
+            color="#2c5dbe"
+            loading={true}
+            size={22}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
       <section className="flex gap-3 mt-5 flex-wrap p-5 bg-gray-0 rounded-lg items-center justify-center bg-gray-50">
         {similarProducts?.map((item) => {
           return (

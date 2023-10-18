@@ -68,7 +68,7 @@ const Login = () => {
           {errorMessage}
         </p>
       )}
-      <div className="flex items-center justify-center mt-2 text-sm md:text-base">
+      <div className="flex flex-col items-center justify-center mt-2 text-sm md:text-base">
         <form
           onSubmit={loginHandler}
           className="bg-zinc-900 text-white flex flex-col gap-5 p-5 rounded-md w-3/4 max-w-[500px]"
@@ -123,6 +123,16 @@ const Login = () => {
             </Link>
           </div>
         </form>
+        <div className="flex flex-col mt-5 items-center justify-center gap-2 text-sm md:text-base font-thin">
+          <p>
+            <span className="font-medium">Admin account:</span> admin@gmail.com{" "}
+            <span className="font-medium"> Password:</span> admin
+          </p>
+          <p>
+            <span className="font-medium">User account</span>: user@gmail.com{" "}
+            <span className="font-medium">Password:</span> user
+          </p>
+        </div>
       </div>
     </div>
   );

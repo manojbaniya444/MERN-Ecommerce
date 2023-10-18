@@ -5,6 +5,8 @@ import { useAppContext } from "../../context/globalContext";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import BarLoader from "react-spinners/BarLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const OrderModal = ({ setOrderModal, total }) => {
   const [loading, setLoading] = useState(false);
@@ -37,12 +39,14 @@ const OrderModal = ({ setOrderModal, total }) => {
     console.log(auth);
 
     try {
+      setLoading(true);
       const response = await axios.post(
-        "http://localhost:8080/cart/orders",
+        "https://mern-ecommerce-sand.vercel.app/cart/orders",
         orderDetails
       );
 
       if (response?.data.success) {
+        setLoading(false);
         setNotification({
           show: true,
           message: response?.data?.message,
@@ -60,6 +64,7 @@ const OrderModal = ({ setOrderModal, total }) => {
         navigate("/user/my-orders");
       }
     } catch (error) {
+      setLoading(false);
       console.log("Catch error", error);
     }
   };
@@ -134,7 +139,18 @@ const OrderModal = ({ setOrderModal, total }) => {
           type="submit"
           className="bg-blue-700 text-white py-2 rounded-md cursor-pointer hover:bg-blue-900"
         >
-          Place Order
+          {loading ? (
+            <ClipLoader
+              color="#ffffff"
+              loading={loading}
+              // cssOverride={override}
+              size={15}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            "Place Order"
+          )}
         </button>
       </form>
     </section>

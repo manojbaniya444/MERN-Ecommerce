@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppContext } from "../../context/globalContext";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AddProducts = () => {
   const [disable, setDisable] = useState(false);
   const [categories, setCategories] = useState();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState();
   const [productFormData, setProductFormData] = useState({
     name: "",
     price: "",
@@ -72,6 +74,7 @@ const AddProducts = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const productData = new FormData();
       productData.append("name", productFormData.name);
       productData.append("description", productFormData.description);
@@ -84,6 +87,7 @@ const AddProducts = () => {
         "https://mern-ecommerce-sand.vercel.app/products/add-product",
         productData
       );
+      setLoading(false);
       setNotification({ show: true, message: "New product created" });
       setProductFormData({
         name: "",
@@ -95,6 +99,7 @@ const AddProducts = () => {
       });
       navigate("/admin");
     } catch (error) {
+      setLoading(false);
       console.log(error);
       setError(error.response.data.message);
     }
@@ -209,7 +214,18 @@ const AddProducts = () => {
             type="submit"
             className="bg-blue-600 text-white  py-2 px-5 rounded-lg cursor-pointer"
           >
-            Create product
+            {loading ? (
+              <ClipLoader
+                color="#ffffff"
+                loading={loading}
+                // cssOverride={override}
+                size={15}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Add Product"
+            )}
           </button>
         </div>
       </form>

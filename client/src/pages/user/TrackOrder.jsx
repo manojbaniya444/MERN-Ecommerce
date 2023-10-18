@@ -14,7 +14,7 @@ const TrackOrder = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8080/cart/my-order/${uid}`
+          `https://mern-ecommerce-sand.vercel.app/cart/my-order/${uid}`
         );
         if (response) {
           setMyOrders(response.data.userOrder);
