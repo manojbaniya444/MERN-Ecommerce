@@ -61,7 +61,7 @@ const Cart = () => {
                 >
                   <div className="w-[100px]">
                     <img
-                      src={`http://localhost:8080/products/product-photo/${item?._id}`}
+                      src={`https://mern-ecommerce-sand.vercel.app/products/product-photo/${item?._id}`}
                       alt={item?.name}
                       className="object-cover w-full"
                     />
